@@ -4,7 +4,8 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { StyleSheet, Text, View, TextInput, Button, TouchableHighlight } from 'react-native';
 
-const Stack = createStackNavigator();
+const MainStack = createStackNavigator();
+const RootStack = createStackNavigator();
 
 function HomeScreen({ navigation }) {
   const [text, setText] = useState("");
@@ -25,44 +26,56 @@ function HomeScreen({ navigation }) {
               alert("You tapped the button!");
             }}
             title="Register"
-            // buttonStyle={styles.button}
             type="outline"
           />
         </TouchableHighlight>
         <TouchableHighlight style={styles.button}>
-          <Button
-            title="Log In"
-            onPress={() => navigation.navigate('Profile', { name: 'Jane' })}
-          />
+            <Button
+              title="Log In"
+              onPress={() => navigation.navigate('Root')}
+            />
         </TouchableHighlight>
       </View>
     </View>
   );
 }
 
-function ProfileScreen() {
+function ModalScreen({ navigation }) {
   return (
     <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-      <Text>Details Screen</Text>
+      <Text>Register</Text>
+      <Button onPress={() => navigation.goBack()} title="Dismiss" />
     </View>
   );
 }
 
-
 export default function App() {
-  const [text, setText] = useState('');
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Home">
-        <Stack.Screen
+      <MainStack.Navigator initialRouteName="Home" mode="modal">
+        <MainStack.Screen
           name="Home"
           component={HomeScreen}
-          // options={{ title: "Welcome" }}
+          options={{ headerShown: false }}
         />
-        <Stack.Screen name="Profile" component={ProfileScreen} />
-      </Stack.Navigator>
+        <MainStack.Screen 
+          name="Root" 
+          component={Root}
+           />
+      </MainStack.Navigator>
     </NavigationContainer>
   );
+}
+
+function Root() {
+  return (
+      <RootStack.Navigator>
+        <RootStack.Screen 
+          name="Register" 
+          options={{ headerShown: false }}
+          component={ModalScreen} />
+      </RootStack.Navigator>
+  )
 }
 
 const styles = StyleSheet.create({
