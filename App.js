@@ -61,6 +61,7 @@ export default function App() {
         <MainStack.Screen 
           name="Root" 
           component={Root}
+          options={{ headerShown: false }}
            />
       </MainStack.Navigator>
     </NavigationContainer>
