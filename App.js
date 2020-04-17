@@ -115,35 +115,6 @@ function CityStack({ navigation }) {
   );
 }
 
-function CityScreen() {
-  return (
-    <Tab.Navigator
-      initialRouteName="YourCity"
-      screenOptions={{
-        headerStyle: {
-          backgroundColor: "#243447"
-        },
-        headerTintColor: "#fff"
-      }}
-    >
-      <Tab.Screen name="Home" component={HomeContent} />
-      <Tab.Screen name="Notifications" component={Notifications} />
-    </Tab.Navigator>
-  );
-}
-
-function ProfileScreen() {
-  return (
-    <Tab.Navigator>
-      <Tab.Screen
-        name="Home"
-        component={HomeStack}
-      />
-      <Tab.Screen name="Notifications" component={Notifications} />
-    </Tab.Navigator>
-  )
-}
-
 function Notifications() {
   return (
     <View>
@@ -180,14 +151,12 @@ function HomeStack() {
 
 function HomeScreen() {
   return (
-  <Tab.Navigator>
-      <Tab.Screen 
-        name="Home"
-        component={HomeStack}
-      />
-      <Tab.Screen name="Notifications" component={Notifications} />
-  </Tab.Navigator>
-  )
+    <Drawer.Navigator>
+      <Drawer.Screen name="Home" component={HomeStack} />
+      <Drawer.Screen name="Your Profile" component={YourProfile} />
+      <Drawer.Screen name="YourCity" component={CityStack} />
+    </Drawer.Navigator>
+  );
 }
 
 const MyTheme = {
@@ -202,28 +171,24 @@ const MyTheme = {
 };
 
 export default function App() {
-  const ref = React.useRef(null);
+  // const ref = React.useRef(null);
 
   return (
-      <NavigationContainer ref={ref} theme={MyTheme}>
-      <Drawer.Navigator
+      <NavigationContainer theme={MyTheme}>
+      <Tab.Navigator
         drawerStyle={{
           backgroundColor: '#243447'
         }}
       >
-        <Drawer.Screen
+        <Tab.Screen
           name="Home"
           component={HomeScreen}
           />
-        <Drawer.Screen
-          name="Profile"
-          component={YourProfile}
+        <Tab.Screen
+          name="Notifications"
+          component={Notifications}
         />
-        <Drawer.Screen
-          name="YourCity"
-          component={CityStack}
-        />
-      </Drawer.Navigator>
+      </Tab.Navigator>
       </NavigationContainer>
   );
 }
