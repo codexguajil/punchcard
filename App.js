@@ -1,4 +1,5 @@
 import "react-native-gesture-handler";
+import GestureRecognizer, { swipeDirections } from 'react-native-swipe-gestures';
 import React, { Component, useState } from 'react';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
@@ -10,7 +11,7 @@ const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
 const Tab = createBottomTabNavigator();
 
-function YourProfile() {
+function YourProfile({navigation}) {
   const DATA = [
     {
       id: '1',
@@ -64,24 +65,40 @@ function YourProfile() {
 
   function Item({title}) {
     return (
-      <View style={styles.item}>
-        <Text style={styles.title}>{title}</Text>
-      </View>
+      <GestureRecognizer
+        onSwipeRight={() => onSwipeRight()}
+      >
+        <View style={styles.item}>
+          <Text style={styles.title}>{title}</Text>
+        </View>
+      </GestureRecognizer>
     )
   }
 
+  const config = {
+    velocityThreshold: .3,
+    directionalOffsetThreshold: 80,
+  };
+
+  function onSwipeRight() {
+    navigation.navigate("Home")
+  }
+
   return (
-    <View style={styles.containertwo}>
-      <View style={styles.container}>
-        <Text style={styles.title}>Pri</Text>
+      <View style={styles.containertwo}>
+        <GestureRecognizer style={styles.container}
+          onSwipeRight= {() => onSwipeRight()}
+        >
+          <View>
+            <Text style={styles.title}>Pri</Text>
+          </View>
+        </GestureRecognizer>
+        <FlatList
+          style={{ flex: 1 }}
+          data={DATA}
+          renderItem={({ item }) => <Item title={item.title} />}
+        />
       </View>
-      <FlatList
-        style={{flex:2}}
-        data={DATA}
-        renderItem={({ item }) => <Item title={item.title}/>}
-      >
-      </FlatList>
-    </View>
   );
 }
 
@@ -105,7 +122,7 @@ function CityStack({ navigation }) {
           headerLeft: () => (
             <Button title="<" onPress={() => navigation.navigate("Home")} />
           ),
-          headerTintColor: "#fff"
+          headerTintColor: "#fff",
         }}
       >
         <Stack.Screen name="Your City" component={YourCity} />
@@ -151,7 +168,8 @@ function HomeStack() {
 
 function HomeScreen() {
   return (
-    <Drawer.Navigator>
+    <Drawer.Navigator
+    >
       <Drawer.Screen name="Home" component={HomeStack} />
       <Drawer.Screen name="Your Profile" component={YourProfile} />
       <Drawer.Screen name="YourCity" component={CityStack} />
@@ -171,7 +189,6 @@ const MyTheme = {
 };
 
 export default function App() {
-  // const ref = React.useRef(null);
 
   return (
       <NavigationContainer theme={MyTheme}>
@@ -204,14 +221,12 @@ const styles = StyleSheet.create({
   },
   containertwo: {
     flex: 1
-    // flexDirection: "column"
   },
   item: {
     backgroundColor: "#243447",
     padding: 20,
     borderBottomColor: "gray",
     borderBottomWidth: StyleSheet.hairlineWidth
-    // marginHorizontal: 16
   },
   textInput: {
     backgroundColor: "#fff",
