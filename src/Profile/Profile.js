@@ -9,6 +9,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import {
   StyleSheet,
+  Image,
   Text,
   View,
   ScrollView,
@@ -96,7 +97,14 @@ export function YourProfile({ navigation }) {
         onSwipeRight={() => onSwipeRight()}
       >
         <View>
-          <Text style={styles.title}>Pri</Text>
+          <Image
+            style={styles.bannerimage}
+            source={require("../../assets/boulder.jpeg")}
+          />
+          <Image
+            style={styles.profilepic}
+            source={require("../../assets/profilepic.jpeg")}
+          />
         </View>
       </GestureRecognizer>
       <FlatList
@@ -109,16 +117,31 @@ export function YourProfile({ navigation }) {
 }
 
 const styles = StyleSheet.create({
+  bannerimage: {
+    flex: .35,
+  },
+  profilepic: {
+    borderRadius: 50,
+    flex: 1,
+    position: 'absolute',
+    marginTop: 50,
+    // justifyContent: 'center',
+    // alignItems: 'center',
+    height: 100,
+    width: 100,
+  },
   container: {
-    flex: 0.5,
+    flex: 1,
     backgroundColor: "#243447",
+    // alignItems: 'center',
     flexDirection: "row",
-    justifyContent: "space-between",
+    // justifyContent: 'center',
+    // justifyContent: "space-between",
     borderBottomColor: "gray",
     borderBottomWidth: StyleSheet.hairlineWidth
   },
   containertwo: {
-    flex: 1
+    flex: 1,
   },
   item: {
     backgroundColor: "#243447",
@@ -134,6 +157,7 @@ const styles = StyleSheet.create({
     width: 200
   },
   title: {
+    flex: .6,
     fontSize: 46,
     color: "#fff"
   },
