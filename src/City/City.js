@@ -17,37 +17,81 @@ import {
   TouchableHighlight,
   FlatList
 } from "react-native";
+import { Candidate } from '../Candidate/Candidate';
 
 const Stack = createStackNavigator();
 
-function YourCity({ navigation }) {
+function YourCity({navigation}) {
+
+  const Data = [
+    {
+      id: "1",
+      title: "Berger Bohm",
+      img: "../../assets/profilepic2.jpeg"
+    },
+    {
+      id: "2",
+      title: "Cynthia Lee",
+      img: "../../assets/profilepic1.jpeg"
+    },
+    {
+      id: "3",
+      title: "Anna Korber",
+      img: "../../assets/profilepic3.jpeg"
+    }
+  ]
+
+  function Item({title}) {
+    return (
+      <TouchableHighlight
+            onPress={() => navigation.navigate("Candidate")}
+          >
+          <View style={styles.item}>
+            <Text style={styles.title}>{title}</Text>
+            </View>
+      </TouchableHighlight>
+    );
+  }
+
   return (
-    <View>
-      <Text style={styles.title}>Your City Goes Here</Text>
+    <View style={{ flex: 1 }}>
+      <View style={{ backgroundColor: "#243447", padding: 20 }}>
+        <Text style={styles.paragraph}>
+          Your city's elections will be held on Monday, April the 15th, 2020.
+          Polls will be open from 8am - 5pm. Don't forget to set a reminder.
+        </Text>
+        <Text style={styles.paragraph}>
+          Your city will require that you bring these forms of id: - driver's
+          license, id, or passport - proof of residence in the form of a bill -
+          AND a social security card
+        </Text>
+      </View>
+      <FlatList
+        style={{ paddingTop: 15 }}
+        data={Data}
+        renderItem={({ item }) => <Item title={item.title} />}
+      />
     </View>
   );
 }
 
-export function CityStack({ navigation }) {
-  return (
-    <View style={{ flex: 1 }}>
-      <Stack.Navigator
-        screenOptions={{
-          headerStyle: {
-            backgroundColor: "#243447"
-          },
-          headerLeft: () => (
-            <Button title="<" onPress={() => navigation.navigate("Home")} />
-          ),
-          headerTintColor: "#fff"
-        }}
-      >
-        <Stack.Screen name="Your City" component={YourCity} />
-      </Stack.Navigator>
-      <Button title="Home" onPress={() => navigation.navigate("Home")} />
-    </View>
-  );
-}
+export function CityStack({ navigation: { goBack } }) {
+         return (
+           <View style={{ flex: 1 }}>
+             <Stack.Navigator
+               initialRouteName="Your City"
+               screenOptions={{
+                 headerLeft: () => (
+                   <Button title="<" onPress={() => goBack()} />
+                 )
+               }}
+             >
+               <Stack.Screen name="Your City" component={YourCity} />
+               <Stack.Screen name="Candidate" component={Candidate} options={{headerShown: false}} />
+             </Stack.Navigator>
+           </View>
+         );
+       }
 
 const styles = StyleSheet.create({
   container: {
@@ -67,16 +111,13 @@ const styles = StyleSheet.create({
     borderBottomColor: "gray",
     borderBottomWidth: StyleSheet.hairlineWidth
   },
-  textInput: {
-    backgroundColor: "#fff",
-    height: 40,
-    borderBottomColor: "#000000",
-    borderBottomWidth: 1,
-    width: 200
+  paragraph: {
+    fontSize: 13,
+    color: "#fff"
   },
   title: {
-    fontSize: 46,
-    color: "#fff"
+    fontSize: 24,
+    color: '#fff'
   },
   button: {
     backgroundColor: "#fff",
