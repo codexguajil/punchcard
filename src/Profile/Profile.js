@@ -23,23 +23,23 @@ export function YourProfile({ navigation }) {
   const DATA = [
     {
       id: "1",
-      title: "First Item"
+      title: "State Comptroller"
     },
     {
       id: "2",
-      title: "Second Item"
+      title: "State Attorney General"
     },
     {
       id: "3",
-      title: "Third Item"
+      title: "Governor"
     },
     {
       id: "4",
-      title: "Fourth Item"
+      title: "Railroad Commissioner"
     },
     {
       id: "5",
-      title: "Fifth Item"
+      title: "Agriculture Commissioner"
     },
     {
       id: "6",
@@ -107,24 +107,35 @@ export function YourProfile({ navigation }) {
             style={styles.profilepic}
             source={require("../../assets/profilepic.jpeg")}
           />
-          <Text style={{ alignSelf: "flex-end", color: "#3399FF" }}>
+          <Text
+            style={{
+              alignSelf: "flex-end",
+              color: "#3399FF",
+              marginRight: 25,
+              margin: 10,
+              fontSize: 20
+            }}
+          >
             Grade: 80%
           </Text>
           <TouchableHighlight style={styles.button}>
-            <Button title="Edit Profile" />
+            <Text style={{ fontSize: 15, color: "#3399FF", fontWeight: 'normal' }}>Edit Profile</Text>
           </TouchableHighlight>
           <FlatList
             style={{
               flexGrow: 0
-              // paddingTop: 10
             }}
             contentContainerStyle={{
               flexDirection: "row",
-              justifyContent: "space-evenly"
+              justifyContent: "space-around"
             }}
             data={rowItems}
             renderItem={({ item }) => (
-              <Text style={{ color: "#3399FF" }}>{item.title}</Text>
+              <Text
+                style={{ color: "#3399FF", fontWeight: "bold", padding: 3 }}
+              >
+                {item.title}
+              </Text>
             )}
           />
         </View>
@@ -143,13 +154,13 @@ const styles = StyleSheet.create({
     flex: .95
   },
   profilepic: {
-    borderRadius: 50,
+    borderRadius: 55,
     flex: 1,
     position: "absolute",
     margin: 25,
-    marginTop: 50,
-    height: 100,
-    width: 100
+    marginTop: 65,
+    height: 110,
+    width: 110
   },
   container: {
     flex: .7,
@@ -164,7 +175,8 @@ const styles = StyleSheet.create({
   },
   item: {
     backgroundColor: "#243447",
-    padding: 20,
+    padding: 15,
+    // alignItems: 'center',
     borderBottomColor: "gray",
     borderBottomWidth: StyleSheet.hairlineWidth
   },
@@ -177,15 +189,19 @@ const styles = StyleSheet.create({
   },
   title: {
     flex: 0.6,
-    fontSize: 46,
+    fontSize: 22,
     color: "#fff"
   },
   button: {
-    borderWidth: 1,
+    borderWidth: .5,
     borderRadius: 10,
     borderColor: "#3399FF",
+    alignItems: 'center',
+    justifyContent: 'center',
     alignSelf: "flex-end",
-    width: 110,
-    margin: 25
+    height: 35,
+    width: 96,
+    marginRight: 30,
+    marginBottom: 25
   }
 });
