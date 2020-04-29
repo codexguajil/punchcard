@@ -81,14 +81,16 @@ export function YourProfile({ navigation }) {
     );
   }
 
-  const config = {
-    velocityThreshold: 0.3,
-    directionalOffsetThreshold: 80
-  };
-
   function onSwipeRight() {
     navigation.navigate("Home");
   }
+
+  const rowItems = [
+    {id: "1", title: "City"},
+    {id: "2", title: "County"},
+    {id: "3", title: "State"},
+    {id: "4", title: "Country"}
+  ]
 
   return (
     <View style={styles.containertwo}>
@@ -105,12 +107,28 @@ export function YourProfile({ navigation }) {
             style={styles.profilepic}
             source={require("../../assets/profilepic.jpeg")}
           />
+          <Text style={{ alignSelf: "flex-end", color: "#3399FF" }}>
+            Grade: 80%
+          </Text>
           <TouchableHighlight style={styles.button}>
             <Button title="Edit Profile" />
           </TouchableHighlight>
+          <FlatList
+            style={{
+              flexGrow: 0
+              // paddingTop: 10
+            }}
+            contentContainerStyle={{
+              flexDirection: "row",
+              justifyContent: "space-evenly"
+            }}
+            data={rowItems}
+            renderItem={({ item }) => (
+              <Text style={{ color: "#3399FF" }}>{item.title}</Text>
+            )}
+          />
         </View>
       </GestureRecognizer>
-      
       <FlatList
         style={{ flex: 1 }}
         data={DATA}
@@ -122,7 +140,7 @@ export function YourProfile({ navigation }) {
 
 const styles = StyleSheet.create({
   bannerimage: {
-    flex: .6
+    flex: .95
   },
   profilepic: {
     borderRadius: 50,
@@ -130,18 +148,14 @@ const styles = StyleSheet.create({
     position: "absolute",
     margin: 25,
     marginTop: 50,
-    // justifyContent: 'center',
-    // alignItems: 'center',
     height: 100,
     width: 100
   },
   container: {
-    flex: .8,
+    flex: .7,
     backgroundColor: "#243447",
-    // alignItems: 'center',
     flexDirection: "row",
     justifyContent: 'center',
-    // justifyContent: "space-around",
     borderBottomColor: "gray",
     borderBottomWidth: StyleSheet.hairlineWidth,
   },
