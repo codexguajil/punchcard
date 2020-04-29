@@ -5,7 +5,7 @@ import { createDrawerNavigator } from '@react-navigation/drawer';
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import { StyleSheet, Text, View, ScrollView, TextInput, Button, TouchableHighlight, FlatList } from 'react-native';
+import { StyleSheet, Text, View, ScrollView, TextInput, Button, TouchableHighlight, FlatList, Image } from 'react-native';
 import { YourProfile } from '../Profile/Profile';
 import { CityStack } from '../City/City';
 import { HomeScreen } from '../Home/Home';
@@ -33,25 +33,38 @@ const MyTheme = {
   }
 };
 
-export default function App() {
+export default function App({ navigation }) {
 
   return (
-      <NavigationContainer theme={MyTheme}>
+    <NavigationContainer theme={MyTheme}>
       <Tab.Navigator
-        drawerStyle={{
-          backgroundColor: '#243447'
+        tabBarOptions={{
+          showLabel: false
         }}
       >
         <Tab.Screen
           name="Home"
           component={HomeScreen}
-          />
+          options={{
+            tabBarIcon: () => (
+              <Image
+                source={require("../../assets/home.png")}
+                // onPress={() => navigation.navigate("Home")}
+              />
+            )
+          }}
+        />
         <Tab.Screen
           name="Notifications"
           component={Notifications}
+          options={{
+            tabBarIcon: () => (
+              <Image source={require("../../assets/bell.png")} />
+            )
+          }}
         />
       </Tab.Navigator>
-      </NavigationContainer>
+    </NavigationContainer>
   );
 }
 
