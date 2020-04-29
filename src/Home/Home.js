@@ -51,7 +51,7 @@ export function HomeScreen() {
     <Drawer.Navigator>
       <Drawer.Screen name="Home" component={HomeStack} />
       <Drawer.Screen name="Your Profile" component={YourProfile} />
-      <Drawer.Screen name="YourCity" component={CityStack} />
+      <Drawer.Screen name="Your City" component={CityStack} />
     </Drawer.Navigator>
   );
 }
