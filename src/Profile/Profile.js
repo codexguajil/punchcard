@@ -105,8 +105,12 @@ export function YourProfile({ navigation }) {
             style={styles.profilepic}
             source={require("../../assets/profilepic.jpeg")}
           />
+          <TouchableHighlight style={styles.button}>
+            <Button title="Edit Profile" />
+          </TouchableHighlight>
         </View>
       </GestureRecognizer>
+      
       <FlatList
         style={{ flex: 1 }}
         data={DATA}
@@ -118,30 +122,31 @@ export function YourProfile({ navigation }) {
 
 const styles = StyleSheet.create({
   bannerimage: {
-    flex: .35,
+    flex: .6
   },
   profilepic: {
     borderRadius: 50,
     flex: 1,
-    position: 'absolute',
+    position: "absolute",
+    margin: 25,
     marginTop: 50,
     // justifyContent: 'center',
     // alignItems: 'center',
     height: 100,
-    width: 100,
+    width: 100
   },
   container: {
-    flex: 1,
+    flex: .8,
     backgroundColor: "#243447",
     // alignItems: 'center',
     flexDirection: "row",
-    // justifyContent: 'center',
-    // justifyContent: "space-between",
+    justifyContent: 'center',
+    // justifyContent: "space-around",
     borderBottomColor: "gray",
-    borderBottomWidth: StyleSheet.hairlineWidth
+    borderBottomWidth: StyleSheet.hairlineWidth,
   },
   containertwo: {
-    flex: 1,
+    flex: 1
   },
   item: {
     backgroundColor: "#243447",
@@ -157,12 +162,16 @@ const styles = StyleSheet.create({
     width: 200
   },
   title: {
-    flex: .6,
+    flex: 0.6,
     fontSize: 46,
     color: "#fff"
   },
   button: {
-    backgroundColor: "#fff",
-    borderRadius: 3
+    borderWidth: 1,
+    borderRadius: 10,
+    borderColor: "#3399FF",
+    alignSelf: "flex-end",
+    width: 110,
+    margin: 25
   }
 });
