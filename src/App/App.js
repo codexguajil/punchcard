@@ -5,7 +5,7 @@ import { createDrawerNavigator } from '@react-navigation/drawer';
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import { StyleSheet, Text, View, ScrollView, TextInput, Button, TouchableHighlight, FlatList, Image } from 'react-native';
+import { StyleSheet, Text, View, ScrollView, TextInput, Button, TouchableOpacity, FlatList, Image } from 'react-native';
 import { YourProfile } from '../Profile/Profile';
 import { CityStack } from '../City/City';
 import { HomeScreen } from '../Home/Home';
@@ -41,16 +41,14 @@ export default function App({ navigation }) {
         tabBarOptions={{
           showLabel: false
         }}
+        initialRouteName={("Main", { screen: "Home" })}
       >
         <Tab.Screen
-          name="Home"
+          name="Main"
           component={HomeScreen}
           options={{
             tabBarIcon: () => (
-              <Image
-                source={require("../../assets/home.png")}
-                // onPress={() => navigation.navigate("Home")}
-              />
+              <Image source={require("../../assets/home.png")} />
             )
           }}
         />
@@ -59,7 +57,9 @@ export default function App({ navigation }) {
           component={Notifications}
           options={{
             tabBarIcon: () => (
-              <Image source={require("../../assets/bell.png")} />
+              <Image
+                source={require("../../assets/bell.png")}
+              />
             )
           }}
         />

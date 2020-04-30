@@ -26,13 +26,13 @@ function YourCity({navigation}) {
   const Data = [
     {
       id: "1",
-      title: "Berger Bohm",
-      img: "../../assets/profilepic2.jpeg"
+      title: "Cynthia Lee",
+      img: "../../assets/profilepic1.jpeg"
     },
     {
       id: "2",
-      title: "Cynthia Lee",
-      img: "../../assets/profilepic1.jpeg"
+      title: "Berger Bohm",
+      img: "../../assets/profilepic2.jpeg"
     },
     {
       id: "3",
@@ -87,7 +87,7 @@ export function CityStack({ navigation: { goBack } }) {
                }}
              >
                <Stack.Screen name="Your City" component={YourCity} />
-               <Stack.Screen name="Candidate" component={Candidate} options={{headerShown: false}} />
+               <Stack.Screen name="Candidate" component={Candidate} options={{headerShown: false, tabBarVisible: false}} />
              </Stack.Navigator>
            </View>
          );

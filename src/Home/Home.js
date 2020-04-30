@@ -48,7 +48,7 @@ function HomeStack() {
 
 export function HomeScreen() {
   return (
-    <Drawer.Navigator>
+    <Drawer.Navigator drawerType="slide">
       <Drawer.Screen name="Home" component={HomeStack} />
       <Drawer.Screen name="Your Profile" component={YourProfile} />
       <Drawer.Screen name="Your City" component={CityStack} />

@@ -15,8 +15,26 @@ import {
 export function Candidate({navigation}) {
   return (
     <View style={{ flex: 1 }}>
-      <Button title="Go back" onPress={() => navigation.goBack()}/>
-      <Image source={require("../../assets/profilepic2.jpeg")} />
+      <Image resizeMode="cover" style={styles.image} source={require("../../assets/profilepic1a.jpg")} />
+      <TouchableHighlight style={styles.button} onPress={() => navigation.goBack()}>
+        <Text style={styles.text}>Back</Text>
+      </TouchableHighlight>
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  image: {
+    height: 300,
+    flex: 0.7,
+    width: null
+  },
+  button: {
+    position: 'absolute',
+    margin: 20
+  },
+  text: {
+    fontSize: 32,
+    color: '#fff',
+  }
+});
