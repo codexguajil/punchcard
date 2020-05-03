@@ -8,7 +8,6 @@ export const fetchMethod = async () => {
     if(!response.ok) {
       throw Error(response.statusText);
     }
-    // console.log(response.json())
     return response.json()
   } catch (error) {
     console.log(error);

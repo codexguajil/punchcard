@@ -35,13 +35,13 @@ const MyTheme = {
   }
 };
 
-const Elections = () => {
-  const { data, error } = useAsync({ promiseFn: fetchMethod })
-  // if (isLoading) return <Text>"Loading..."</Text>
-if (error) return <Text>{error.message}</Text>;
-if (data) return <Text>{`Hi this is the data ${data.kind}`}</Text>;
-  return null
-}
+// const Elections = () => {
+//   const { data, error } = useAsync({ promiseFn: fetchMethod })
+//   // if (isLoading) return <Text>"Loading..."</Text>
+// if (error) return <Text>{error.message}</Text>;
+// if (data) return <Text>{`Hi this is the data ${data.kind}`}</Text>;
+//   return null
+// }
 
 // const { data, error, isLoading } = useAsync({ promiseFn: fetchMethod })
   // if (isLoading) return <Text>"Loading..."</Text>;
@@ -51,7 +51,7 @@ if (data) return <Text>{`Hi this is the data ${data.kind}`}</Text>;
   export default function App() {
     return (
       <NavigationContainer theme={MyTheme}>
-      <Elections style={{flex: 3, margin: 50, position: 'absolute', margin: 200}}/>
+      {/* <Elections style={{flex: 3, margin: 50, position: 'absolute', margin: 200}}/> */}
       <Tab.Navigator
         tabBarOptions={{
           showLabel: false
