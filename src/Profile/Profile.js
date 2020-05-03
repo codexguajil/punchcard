@@ -3,71 +3,18 @@ import GestureRecognizer, {
   swipeDirections
 } from "react-native-swipe-gestures";
 import { useAsync } from "react-async";
-import React, { Component, useState } from "react";
+import React, { useState } from "react";
 import {
   StyleSheet,
   Image,
   Text,
   View,
-  ScrollView,
-  TextInput,
-  Button,
   TouchableHighlight,
   FlatList
 } from "react-native";
 import { fetchMethod } from "../../utils/fetch";
 
 export function YourProfile({ navigation }) {
-  const DATA = [
-    {
-      id: "1",
-      title: "State Comptroller",
-    },
-    {
-      id: "2",
-      title: "State Attorney General",
-    },
-    {
-      id: "3",
-      title: "Governor",
-    },
-    {
-      id: "4",
-      title: "Railroad Commissioner",
-    },
-    {
-      id: "5",
-      title: "Agriculture Commissioner",
-    },
-    {
-      id: "6",
-      title: "Sixth Item",
-    },
-    {
-      id: "7",
-      title: "Seventh Item",
-    },
-    {
-      id: "8",
-      title: "Eigth Item",
-    },
-    {
-      id: "9",
-      title: "Ninth Item",
-    },
-    {
-      id: "10",
-      title: "Tenth Item",
-    },
-    {
-      id: "11",
-      title: "Eleventh Item",
-    },
-    {
-      id: "12",
-      title: "Twelveth Item",
-    },
-  ];
 
   function Item({ title }) {
     return (
