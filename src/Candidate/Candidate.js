@@ -3,13 +3,8 @@ import {
   StyleSheet,
   Text,
   View,
-  ScrollView,
-  TextInput,
-  Button,
   TouchableHighlight,
-  FlatList,
   Image,
-  StatusBar
 } from "react-native";
 
 export function Candidate({navigation}) {

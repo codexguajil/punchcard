@@ -1,19 +1,13 @@
 import "react-native-gesture-handler";
 import GestureRecognizer, { swipeDirections } from 'react-native-swipe-gestures';
-import React, { Component, useState, useEffect } from 'react';
-import { useAsync } from 'react-async';
+import React from 'react';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import { StyleSheet, Text, View, ScrollView, TextInput, Button, TouchableOpacity, FlatList, Image } from 'react-native';
-import { YourProfile } from '../Profile/Profile';
-import { CityStack } from '../City/City';
+import { StyleSheet, Text, View, Image } from 'react-native';
 import { HomeScreen } from '../Home/Home';
-import { fetchMethod } from '../../utils/fetch';
 
-const Stack = createStackNavigator();
-const Drawer = createDrawerNavigator();
 const Tab = createBottomTabNavigator();
 
 function Notifications() {
@@ -34,24 +28,10 @@ const MyTheme = {
     border: "gray"
   }
 };
-
-// const Elections = () => {
-//   const { data, error } = useAsync({ promiseFn: fetchMethod })
-//   // if (isLoading) return <Text>"Loading..."</Text>
-// if (error) return <Text>{error.message}</Text>;
-// if (data) return <Text>{`Hi this is the data ${data.kind}`}</Text>;
-//   return null
-// }
-
-// const { data, error, isLoading } = useAsync({ promiseFn: fetchMethod })
-  // if (isLoading) return <Text>"Loading..."</Text>;
-  // if (error) return  <Text>`Something went wrong: ${error.message}`</Text>
-  // if (data)
   
   export default function App() {
     return (
       <NavigationContainer theme={MyTheme}>
-      {/* <Elections style={{flex: 3, margin: 50, position: 'absolute', margin: 200}}/> */}
       <Tab.Navigator
         tabBarOptions={{
           showLabel: false

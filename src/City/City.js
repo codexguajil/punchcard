@@ -3,16 +3,11 @@ import GestureRecognizer, {
   swipeDirections
 } from "react-native-swipe-gestures";
 import React, { Component, useState } from "react";
-import { createDrawerNavigator } from "@react-navigation/drawer";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import {
   StyleSheet,
   Text,
   View,
-  ScrollView,
-  TextInput,
   Button,
   TouchableHighlight,
   FlatList

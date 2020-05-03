@@ -4,10 +4,6 @@ import GestureRecognizer, {
 } from "react-native-swipe-gestures";
 import { useAsync } from "react-async";
 import React, { Component, useState } from "react";
-import { createDrawerNavigator } from "@react-navigation/drawer";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { NavigationContainer } from "@react-navigation/native";
-import { createStackNavigator } from "@react-navigation/stack";
 import {
   StyleSheet,
   Image,
