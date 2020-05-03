@@ -1,6 +1,7 @@
 import "react-native-gesture-handler";
 import GestureRecognizer, { swipeDirections } from 'react-native-swipe-gestures';
-import React, { Component, useState } from 'react';
+import React, { Component, useState, useEffect } from 'react';
+import { useAsync } from 'react-async';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { NavigationContainer } from '@react-navigation/native';
@@ -9,6 +10,7 @@ import { StyleSheet, Text, View, ScrollView, TextInput, Button, TouchableOpacity
 import { YourProfile } from '../Profile/Profile';
 import { CityStack } from '../City/City';
 import { HomeScreen } from '../Home/Home';
+import { fetchMethod } from '../../utils/fetch';
 
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -17,7 +19,7 @@ const Tab = createBottomTabNavigator();
 function Notifications() {
   return (
     <View>
-      <Text style={styles.title}>hi</Text>
+      <Text style={styles.title}>Notifications</Text>
     </View>
   );
 }
@@ -33,10 +35,23 @@ const MyTheme = {
   }
 };
 
-export default function App({ navigation }) {
+const Elections = () => {
+  const { data, error } = useAsync({ promiseFn: fetchMethod })
+  // if (isLoading) return <Text>"Loading..."</Text>
+if (error) return <Text>{error.message}</Text>;
+if (data) return <Text>{`Hi this is the data ${data.kind}`}</Text>;
+  return null
+}
 
-  return (
-    <NavigationContainer theme={MyTheme}>
+// const { data, error, isLoading } = useAsync({ promiseFn: fetchMethod })
+  // if (isLoading) return <Text>"Loading..."</Text>;
+  // if (error) return  <Text>`Something went wrong: ${error.message}`</Text>
+  // if (data)
+  
+  export default function App() {
+    return (
+      <NavigationContainer theme={MyTheme}>
+      <Elections style={{flex: 3, margin: 50, position: 'absolute', margin: 200}}/>
       <Tab.Navigator
         tabBarOptions={{
           showLabel: false
@@ -49,8 +64,8 @@ export default function App({ navigation }) {
           options={{
             tabBarIcon: () => (
               <Image source={require("../../assets/home.png")} />
-            )
-          }}
+              )
+            }}
         />
         <Tab.Screen
           name="Notifications"
@@ -58,10 +73,10 @@ export default function App({ navigation }) {
           options={{
             tabBarIcon: () => (
               <Image
-                source={require("../../assets/bell.png")}
+              source={require("../../assets/bell.png")}
               />
-            )
-          }}
+              )
+            }}
         />
       </Tab.Navigator>
     </NavigationContainer>
