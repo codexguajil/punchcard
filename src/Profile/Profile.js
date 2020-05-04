@@ -3,7 +3,7 @@ import GestureRecognizer, {
   swipeDirections
 } from "react-native-swipe-gestures";
 import { useAsync } from "react-async";
-import React, { useState } from "react";
+import React, { useState, useEffect, useReducer } from "react";
 import {
   StyleSheet,
   Image,
@@ -15,7 +15,7 @@ import {
 import { fetchMethod } from "../../utils/fetch";
 
 export function YourProfile({ navigation }) {
-
+  const [elections, setElections] = useState([])
   function Item({ title }) {
     return (
       <GestureRecognizer onSwipeRight={() => onSwipeRight()}>
@@ -37,10 +37,20 @@ export function YourProfile({ navigation }) {
     { id: "4", title: "Country" },
   ];
 
-  const { data, error, isLoading } = useAsync({ promiseFn: fetchMethod });
-  if (isLoading) return <Text>"Loading..."</Text>
-  if (error) return <Text>{error.message}</Text>;
-  if (data)
+    // const { data, error, isLoading } = useAsync({ promiseFn: fetchMethod });
+    // if (isLoading) return <Text>"Loading..."</Text>
+    // if (error) return <Text>{error.message}</Text>;
+
+    const getElections = async () => {
+      const data = await fetchMethod()
+      setElections(data.contests);
+    }
+    
+    useEffect(() => {
+      if(!elections.length) {
+       getElections()
+      }
+    }, [])
 
   return (
     <View style={styles.containertwo}>
@@ -94,10 +104,11 @@ export function YourProfile({ navigation }) {
           />
         </View>
       </GestureRecognizer>
-      <FlatList
+       <FlatList
         style={{ flex: 1 }}
-        data={data.contests}
+        data={elections}
         renderItem={({ item }) => <Item title={item.office} />}
+        keyExtractor={(item, index) => 'key' + index}
       />
     </View>
   );
@@ -130,7 +141,6 @@ const styles = StyleSheet.create({
   item: {
     backgroundColor: "#243447",
     padding: 15,
-    // alignItems: 'center',
     borderBottomColor: "gray",
     borderBottomWidth: StyleSheet.hairlineWidth
   },
