@@ -37,20 +37,16 @@ export function YourProfile({ navigation }) {
     { id: "4", title: "Country" },
   ];
 
-    // const { data, error, isLoading } = useAsync({ promiseFn: fetchMethod });
-    // if (isLoading) return <Text>"Loading..."</Text>
-    // if (error) return <Text>{error.message}</Text>;
-
-    const getElections = async () => {
-      const data = await fetchMethod()
-      setElections(data.contests);
-    }
-    
-    useEffect(() => {
-      if(!elections.length) {
-       getElections()
+  
+  useEffect(() => {
+    if(!elections.length) {
+      const getElections = async () => {
+        const data = await fetchMethod()
+        setElections(data.contests);
       }
-    }, [])
+      getElections()
+    }
+  }, [fetchMethod])
 
   return (
     <View style={styles.containertwo}>
@@ -153,7 +149,7 @@ const styles = StyleSheet.create({
   },
   title: {
     flex: 0.6,
-    fontSize: 22,
+    fontSize: 14,
     color: "#fff"
   },
   button: {
