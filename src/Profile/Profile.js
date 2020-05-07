@@ -157,7 +157,10 @@ const styles = StyleSheet.create({
     flex: 1
   },
   item: {
+    flexDirection: 'row',
     backgroundColor: "#243447",
+    justifyContent: 'space-between',
+    alignItems: 'center',
     padding: 15,
     borderBottomColor: "gray",
     borderBottomWidth: StyleSheet.hairlineWidth
@@ -170,7 +173,7 @@ const styles = StyleSheet.create({
     width: 200
   },
   title: {
-    flex: 0.6,
+    flex: 1,
     fontSize: 14,
     color: "#fff"
   },
