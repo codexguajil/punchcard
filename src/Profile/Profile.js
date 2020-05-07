@@ -60,27 +60,12 @@ export function YourProfile({ navigation }) {
     { id: "4", title: "Country" },
   ];
 
-  function reducer(state, action) {
-    switch (action.type) {
-      case 'toggleVote':
-        state.elections.forEach((election, id) => {
-          if (id === action.id) {
-            !election.voted
-          }
-        })
-        return {elections: state.elections};
-      case 'setElections':
-        return {elections: action.data};
-      default:
-        throw new Error();
-    }
-  }
-
   useEffect(() => {
     if(!state.elections.length) {
       const getElections = async () => {
         const data = await fetchMethod()
-        dispatch({ type: "setElections", data: data.contests });
+        const elections = addId(data.contests)
+        dispatch({ type: "setElections", data: elections });
       }
       getElections()
     }
