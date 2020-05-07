@@ -15,19 +15,15 @@ import {
 import { fetchMethod } from "../../utils/fetch";
 
 export function YourProfile({ navigation }) {
-  const [elections, setElections] = useState([])
+  const initialState = {elections: []};
+  const [state, dispatch] = useReducer(reducer, initialState)
+
   function Item({ title }) {
     return (
-      <GestureRecognizer onSwipeRight={() => onSwipeRight()}>
         <View style={styles.item}>
           <Text style={styles.title}>{title}</Text>
         </View>
-      </GestureRecognizer>
     );
-  }
-
-  function onSwipeRight() {
-    navigation.navigate("Home");
   }
 
   const rowItems = [
@@ -37,12 +33,28 @@ export function YourProfile({ navigation }) {
     { id: "4", title: "Country" },
   ];
 
+  function reducer(state, action) {
+    switch (action.type) {
+      case 'toggleVote':
+        state.elections.forEach((election, id) => {
+          if (id === action.id) {
+            !election.voted
+          }
+        })
+        return {elections: state.elections};
+      case 'setElections':
+        return {elections: action.data};
+      default:
+        throw new Error();
+    }
+  }
+
   
   useEffect(() => {
-    if(!elections.length) {
+    if(!state.elections.length) {
       const getElections = async () => {
         const data = await fetchMethod()
-        setElections(data.contests);
+        dispatch({ type: "setElections", data: data.contests });
       }
       getElections()
     }
@@ -102,7 +114,7 @@ export function YourProfile({ navigation }) {
       </GestureRecognizer>
        <FlatList
         style={{ flex: 1 }}
-        data={elections}
+        data={state.elections}
         renderItem={({ item }) => <Item title={item.office} />}
         keyExtractor={(item, index) => 'key' + index}
       />
