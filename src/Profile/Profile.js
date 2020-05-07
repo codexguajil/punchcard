@@ -11,7 +11,26 @@ import {
   TouchableHighlight,
   FlatList
 } from "react-native";
-import { fetchMethod } from "../../utils/fetch";
+import { fetchMethod, addId } from "../../utils/fetch";
+import { Icon } from "react-native-elements";
+
+  function reducer(state, action) {
+    switch (action.type) {
+      case "toggleVote":
+        state.elections.forEach((election) => {
+          if (election.id == action.id) {
+            election.voted = !election.voted;
+            console.log(election.voted);
+            console.log(election.office);
+          }
+        });
+        return { elections: state.elections };
+      case "setElections":
+        return { elections: action.data };
+      default:
+        throw new Error();
+    }
+  }
 
 export function YourProfile({ navigation }) {
   const initialState = {elections: []};
