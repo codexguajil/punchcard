@@ -7,6 +7,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { StyleSheet, Text, View, Image } from 'react-native';
 import { HomeScreen } from '../Home/Home';
+import { Icon } from 'react-native-elements';
 
 const Tab = createBottomTabNavigator();
 
@@ -32,35 +33,41 @@ const MyTheme = {
   export default function App() {
     return (
       <NavigationContainer theme={MyTheme}>
-      <Tab.Navigator
-        tabBarOptions={{
-          showLabel: false
-        }}
-        initialRouteName={("Main", { screen: "Home" })}
-      >
-        <Tab.Screen
-          name="Main"
-          component={HomeScreen}
-          options={{
-            tabBarIcon: () => (
-              <Image source={require("../../assets/home.png")} />
-              )
+        <Tab.Navigator
+          tabBarOptions={{
+            showLabel: false,
+          }}
+          initialRouteName={("Main", { screen: "Home" })}
+        >
+          <Tab.Screen
+            name="Main"
+            component={HomeScreen}
+            options={{
+              tabBarIcon: () => (
+                <Icon
+                  name="home"
+                  color="white"
+                  size={30}
+                />
+              ),
             }}
-        />
-        <Tab.Screen
-          name="Notifications"
-          component={Notifications}
-          options={{
-            tabBarIcon: () => (
-              <Image
-              source={require("../../assets/bell.png")}
-              />
-              )
+          />
+          <Tab.Screen
+            name="Notifications"
+            component={Notifications}
+            options={{
+              tabBarIcon: () => (
+                <Icon
+                  name="notifications"
+                  color="white"
+                  size={30}
+                />
+              ),
             }}
-        />
-      </Tab.Navigator>
-    </NavigationContainer>
-  );
+          />
+        </Tab.Navigator>
+      </NavigationContainer>
+    );
 }
 
 const styles = StyleSheet.create({

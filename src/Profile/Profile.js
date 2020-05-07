@@ -2,8 +2,7 @@ import "react-native-gesture-handler";
 import GestureRecognizer, {
   swipeDirections
 } from "react-native-swipe-gestures";
-import { useAsync } from "react-async";
-import React, { useState, useEffect, useReducer } from "react";
+import React, { useEffect, useReducer } from "react";
 import {
   StyleSheet,
   Image,
@@ -49,7 +48,6 @@ export function YourProfile({ navigation }) {
     }
   }
 
-  
   useEffect(() => {
     if(!state.elections.length) {
       const getElections = async () => {
