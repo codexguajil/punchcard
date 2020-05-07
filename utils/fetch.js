@@ -13,3 +13,11 @@ export const fetchMethod = async () => {
     console.log(error);
   }
 }
+
+export const addId = (contests) => {
+  contests.forEach((contest, i) => {
+    contest.id = i.toString();
+    contest.voted = false;
+  })
+  return contests;
+}
