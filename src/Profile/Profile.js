@@ -126,8 +126,7 @@ export function YourProfile({ navigation }) {
        <FlatList
         style={{ flex: 1 }}
         data={state.elections}
-        renderItem={({ item }) => <Item title={item.office} />}
-        keyExtractor={(item, index) => 'key' + index}
+        renderItem={({ item }) => <Item title={item.office} key={item.id} id={item.id} />}
       />
     </View>
   );
