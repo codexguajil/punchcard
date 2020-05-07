@@ -36,11 +36,20 @@ export function YourProfile({ navigation }) {
   const initialState = {elections: []};
   const [state, dispatch] = useReducer(reducer, initialState)
 
-  function Item({ title }) {
+  function Item({ title, id }) {
     return (
-        <View style={styles.item}>
-          <Text style={styles.title}>{title}</Text>
-        </View>
+      <View style={styles.item}>
+        <Text style={styles.title}>{title}</Text>
+        <Icon
+          reverse
+          reverseColor="green"
+          name="checkbox-blank-circle-outline"
+          type="material-community"
+          color="lightblue"
+          size={12}
+          onPress={() => dispatch({type: 'toggleVote', id: id})}
+        />
+      </View>
     );
   }
 
