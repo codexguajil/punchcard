@@ -13,24 +13,71 @@ import {
 } from "react-native";
 import { fetchMethod, addId } from "../../utils/fetch";
 import { Icon } from "react-native-elements";
+import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
+import { NavigationContainer } from "@react-navigation/native";
 
-  function reducer(state, action) {
-    switch (action.type) {
-      case "toggleVote":
-        state.elections.forEach((election) => {
-          if (election.id == action.id) {
-            election.voted = !election.voted;
-            console.log(election.voted);
-            console.log(election.office);
-          }
-        });
-        return { elections: state.elections };
-      case "setElections":
-        return { elections: action.data };
-      default:
-        throw new Error();
-    }
+const Tab = createMaterialTopTabNavigator();
+
+function City() {
+  return (
+    <View>
+      <Text style={{ color: "red", fontSize: 24 }}>City</Text>
+    </View>
+  );
+}
+
+function County() {
+  return (
+    <View>
+      <Text style={{ color: "red", fontSize: 24 }}>County</Text>
+    </View>
+  );
+}
+
+function State() {
+  return (
+    <View>
+      <Text style={{ color: "red", fontSize: 24 }}>State</Text>
+    </View>
+  );
+}
+
+function Country() {
+  return (
+    <View>
+      <Text style={{color: 'red', fontSize: 24}}>Country</Text>
+    </View>
+  )
+}
+
+function TopTabs() {
+  return (
+    <Tab.Navigator>
+      <Tab.Screen name="City" component={City} />
+      <Tab.Screen name="County" component={County} />
+      <Tab.Screen name="State" component={State} />
+      <Tab.Screen name="Country" component={Country} />
+    </Tab.Navigator>
+  );
+}
+
+function reducer(state, action) {
+  switch (action.type) {
+    case "toggleVote":
+      state.elections.forEach((election) => {
+        if (election.id == action.id) {
+          election.voted = !election.voted;
+          console.log(election.voted);
+          console.log(election.office);
+        }
+      });
+      return { elections: state.elections };
+    case "setElections":
+      return { elections: action.data };
+    default:
+      throw new Error();
   }
+}
 
 export function YourProfile({ navigation }) {
   const initialState = {elections: []};
@@ -53,13 +100,6 @@ export function YourProfile({ navigation }) {
     );
   }
 
-  const rowItems = [
-    { id: "1", title: "City" },
-    { id: "2", title: "County" },
-    { id: "3", title: "State" },
-    { id: "4", title: "Country" },
-  ];
-
   useEffect(() => {
     if(!state.elections.length) {
       const getElections = async () => {
@@ -75,7 +115,7 @@ export function YourProfile({ navigation }) {
     <View style={styles.containertwo}>
       <GestureRecognizer
         style={styles.container}
-        onSwipeRight={() => onSwipeRight()}
+        // onSwipeRight={() => onSwipeRight()}
       >
         <View>
           <Image
@@ -104,30 +144,14 @@ export function YourProfile({ navigation }) {
               Edit Profile
             </Text>
           </TouchableHighlight>
-          <FlatList
-            style={{
-              flexGrow: 0,
-            }}
-            contentContainerStyle={{
-              flexDirection: "row",
-              justifyContent: "space-around",
-            }}
-            data={rowItems}
-            renderItem={({ item }) => (
-              <Text
-                style={{ color: "#3399FF", fontWeight: "bold", padding: 3 }}
-              >
-                {item.title}
-              </Text>
-            )}
-          />
         </View>
       </GestureRecognizer>
-       <FlatList
+       <TopTabs />
+       {/* <FlatList
         style={{ flex: 1 }}
         data={state.elections}
         renderItem={({ item }) => <Item title={item.office} key={item.id} id={item.id} />}
-      />
+      /> */}
     </View>
   );
 }
@@ -146,7 +170,7 @@ const styles = StyleSheet.create({
     width: 110
   },
   container: {
-    flex: .7,
+    flex: .6,
     backgroundColor: "#243447",
     flexDirection: "row",
     justifyContent: 'center',
@@ -187,6 +211,6 @@ const styles = StyleSheet.create({
     height: 35,
     width: 96,
     marginRight: 30,
-    marginBottom: 25
+    marginBottom: 20
   }
 });
