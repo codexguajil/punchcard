@@ -174,8 +174,8 @@ const styles = StyleSheet.create({
     backgroundColor: "#243447",
     flexDirection: "row",
     justifyContent: 'center',
-    borderBottomColor: "gray",
-    borderBottomWidth: StyleSheet.hairlineWidth,
+    // borderBottomColor: "gray",
+    // borderBottomWidth: StyleSheet.hairlineWidth,
   },
   containertwo: {
     flex: 1
