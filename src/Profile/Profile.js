@@ -15,7 +15,6 @@ import {
 import { fetchMethod, addId } from "../../utils/fetch";
 import { Icon } from "react-native-elements";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
-import { NavigationContainer } from "@react-navigation/native";
 
 const Tab = createMaterialTopTabNavigator();
 
@@ -196,6 +195,9 @@ export function YourProfile({ navigation }) {
             style={styles.bannerimage}
             source={require("../../assets/boulder.jpeg")}
           />
+          <TouchableHighlight style={styles.backButton} onPress={() => navigation.goBack()} >
+            <Icon name="keyboard-arrow-left" color="white" size={35}>back</Icon>
+          </TouchableHighlight>
           <Image
             style={styles.profilepic}
             source={require("../../assets/profilepic.jpeg")}
@@ -243,8 +245,6 @@ const styles = StyleSheet.create({
     backgroundColor: "#243447",
     flexDirection: "row",
     justifyContent: 'center',
-    // borderBottomColor: "gray",
-    // borderBottomWidth: StyleSheet.hairlineWidth,
   },
   containertwo: {
     flex: 1
@@ -281,5 +281,10 @@ const styles = StyleSheet.create({
     width: 96,
     marginRight: 30,
     marginBottom: 20
+  },
+  backButton: {
+    position: 'absolute',
+    margin: 15,
+    flex: 1
   }
 });
