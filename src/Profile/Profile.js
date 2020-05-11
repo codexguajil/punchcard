@@ -18,18 +18,20 @@ import { NavigationContainer } from "@react-navigation/native";
 
 const Tab = createMaterialTopTabNavigator();
 
-function Item({ title, id }) {
+function Item({ title, id, name }) {
+  const [state, dispatch] = useReducer(reducer, initialState);
+
   return (
     <View style={styles.item}>
       <Text style={styles.title}>{title}</Text>
       <Icon
         reverse
-        reverseColor="green"
+        reverseColor="lightblue"
         name="checkbox-blank-circle-outline"
         type="material-community"
         color="lightblue"
         size={12}
-        onPress={() => dispatch({ type: "toggleVote", id: id })}
+        onPress={() => dispatch({type: 'toggleVote', id: id, name: name})}
       />
     </View>
   );
