@@ -196,12 +196,7 @@ export function YourProfile({ navigation }) {
           </TouchableHighlight>
         </View>
       </GestureRecognizer>
-       <TopTabs />
-       {/* <FlatList
-        style={{ flex: 1 }}
-        data={state.elections}
-        renderItem={({ item }) => <Item title={item.office} key={item.id} id={item.id} />}
-      /> */}
+       <TopTabs data={state.elections} />
     </View>
   );
 }
