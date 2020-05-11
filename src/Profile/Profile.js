@@ -53,7 +53,7 @@ function State({route}) {
         style={{ flex: 1 }}
         data={route.params.data}
         renderItem={({ item }) => (
-          <Item title={item.office} key={item.id} id={item.id} />
+          <Item title={item.office} key={item.id} id={item.id} name="statewide"/>
         )}
       />
     </View>
@@ -67,7 +67,7 @@ function Country({route}) {
         style={{ flex: 1 }}
         data={route.params.data}
         renderItem={({ item }) => (
-          <Item title={item.office} key={item.id} id={item.id} />
+          <Item title={item.office} key={item.id} id={item.id} name="nationwide"/>
         )}
       />
     </View>
