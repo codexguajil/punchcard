@@ -112,7 +112,35 @@ function reducer(state, action) {
       });
       return { elections: state.elections };
     case "setElections":
-      return { elections: action.data };
+      const cityContests = [];
+      const countyContests = [];
+      const stateContests = [];
+      const countryContests = [];
+
+      action.data.forEach(election => {
+        if (
+          election.district.scope === "statewide" ||
+          election.district.scope === "stateUpper" ||
+          election.district.scope === "stateLower" &&
+          election.office != "U. S. Senator"
+        ) {
+          stateContests.push(election);
+        }
+        if (
+          election.district.scope === "countywide" ||
+          election.district.scope === "countyCouncil"
+        ) {
+          countyContests.push(election);
+        }
+        if (
+          election.district.scope === "congressional" ||
+          election.office === "U. S. Senator"
+        ) {
+          countryContests.push(election);
+        }
+      })
+
+      return { elections: { countywide: countyContests, statewide: stateContests, nationwide: countryContests} };
     default:
       throw new Error();
   }
@@ -121,23 +149,6 @@ function reducer(state, action) {
 export function YourProfile({ navigation }) {
   const initialState = {elections: []};
   const [state, dispatch] = useReducer(reducer, initialState)
-
-  function Item({ title, id }) {
-    return (
-      <View style={styles.item}>
-        <Text style={styles.title}>{title}</Text>
-        <Icon
-          reverse
-          reverseColor="green"
-          name="checkbox-blank-circle-outline"
-          type="material-community"
-          color="lightblue"
-          size={12}
-          onPress={() => dispatch({type: 'toggleVote', id: id})}
-        />
-      </View>
-    );
-  }
 
   useEffect(() => {
     if(!state.elections.length) {
