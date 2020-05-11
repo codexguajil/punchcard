@@ -2,6 +2,7 @@ import "react-native-gesture-handler";
 import GestureRecognizer, {
   swipeDirections
 } from "react-native-swipe-gestures";
+import { useNavigation, DrawerActions } from "@react-navigation/native";
 import React, { Component, useState } from "react";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import { createStackNavigator } from "@react-navigation/stack";
@@ -17,10 +18,15 @@ const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
 
 function HomeContent() {
+  const navigation = useNavigation();
   return (
-    <View style={styles.containertwo}>
-      <Text style={styles.title}>Hello</Text>
-    </View>
+    <GestureRecognizer style={{flex: 1}}
+      onSwipeRight={() => navigation.dispatch(DrawerActions.openDrawer())}
+    >
+      <View style={styles.containertwo}>
+        <Text style={styles.title}>Hello</Text>
+      </View>
+    </GestureRecognizer>
   );
 }
 

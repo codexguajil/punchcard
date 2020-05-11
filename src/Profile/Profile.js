@@ -3,6 +3,7 @@ import GestureRecognizer, {
   swipeDirections
 } from "react-native-swipe-gestures";
 import React, { useEffect, useReducer } from "react";
+import { DrawerActions } from "@react-navigation/native";
 import {
   StyleSheet,
   Image,
@@ -188,7 +189,7 @@ export function YourProfile({ navigation }) {
     <View style={styles.containertwo}>
       <GestureRecognizer
         style={styles.container}
-        // onSwipeRight={() => onSwipeRight()}
+        onSwipeRight={() => navigation.dispatch(DrawerActions.openDrawer())}
       >
         <View>
           <Image
@@ -219,7 +220,7 @@ export function YourProfile({ navigation }) {
           </TouchableHighlight>
         </View>
       </GestureRecognizer>
-       <TopTabs data={state.elections} />
+      <TopTabs data={state.elections} />
     </View>
   );
 }
