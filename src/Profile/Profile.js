@@ -155,17 +155,24 @@ function reducer(state, action) {
           countryContests.push(election);
         }
       })
-
+      initialState = {
+        elections: {
+          countywide: countyContests,
+          statewide: stateContests,
+          nationwide: countryContests,
+        },
+      };
       return { elections: { countywide: countyContests, statewide: stateContests, nationwide: countryContests} };
     default:
       throw new Error();
   }
 }
 
-export function YourProfile({ navigation }) {
-  const initialState = {elections: []};
-  const [state, dispatch] = useReducer(reducer, initialState)
+let initialState = {elections: []};
 
+export function YourProfile({ navigation }) {
+  const [state, dispatch] = useReducer(reducer, initialState)
+  
   useEffect(() => {
     if(!state.elections.length) {
       const getElections = async () => {
