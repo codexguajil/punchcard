@@ -44,26 +44,32 @@ function City() {
 }
 
 
-function State({data}) {
-  // console.log(data)
+function State({route}) {
   return (
-    <View>
-      <Text style={{ color: "red", fontSize: 24 }}>State</Text>
-      {/* <FlatList
+    <View style={{flex: 1}}>
+      <FlatList
         style={{ flex: 1 }}
-        data={data}
-        renderItem={({ item }) => <Item title={item.office} key={item.id} id={item.id} />}
-        /> */}
+        data={route.params.data}
+        renderItem={({ item }) => (
+          <Item title={item.office} key={item.id} id={item.id} />
+        )}
+      />
     </View>
   );
 }
 
-function Country() {
+function Country({route}) {
   return (
-    <View>
-      <Text style={{color: 'red', fontSize: 24}}>Country</Text>
+    <View style={{flex: 1}}>
+      <FlatList
+        style={{ flex: 1 }}
+        data={route.params.data}
+        renderItem={({ item }) => (
+          <Item title={item.office} key={item.id} id={item.id} />
+        )}
+      />
     </View>
-  )
+  );
 }
 
 function County({route}) {
@@ -83,19 +89,27 @@ function County({route}) {
 
 function TopTabs({data}) {
   return (
-    <View style={{flex: 1}}>
-      { data.countywide &&
-      <Tab.Navigator >
-        <Tab.Screen name="City" component={City} />
-        <Tab.Screen
-          name="County"
-          component={County}
-          initialParams={{'data': data.countywide}}
-        />
-        <Tab.Screen name="State" component={State} />
-        <Tab.Screen name="Country" component={Country} />
-      </Tab.Navigator>
-      }
+    <View style={{ flex: 1 }}>
+      {data.countywide && (
+        <Tab.Navigator>
+          <Tab.Screen name="City" component={City} />
+          <Tab.Screen
+            name="County"
+            component={County}
+            initialParams={{ data: data.countywide }}
+          />
+          <Tab.Screen
+            name="State"
+            component={State}
+            initialParams={{ data: data.statewide }}
+          />
+          <Tab.Screen
+            name="Country"
+            component={Country}
+            initialParams={{ data: data.nationwide }}
+          />
+        </Tab.Navigator>
+      )}
     </View>
   );
 }
