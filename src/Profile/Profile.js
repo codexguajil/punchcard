@@ -82,7 +82,7 @@ function County({route}) {
         style={{ flex: 1 }}
         data={route.params.data}
         renderItem={({ item }) => (
-          <Item title={item.office} key={item.id} id={item.id} />
+          <Item title={item.office} key={item.id} id={item.id} name="countywide"/>
         )}
       />
     </View>
