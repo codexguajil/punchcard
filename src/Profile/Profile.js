@@ -66,14 +66,37 @@ function Country() {
   )
 }
 
-function TopTabs() {
+function County({route}) {
+  console.log(route.params.data[1].office)
   return (
-    <Tab.Navigator>
-      <Tab.Screen name="City" component={City} />
-      <Tab.Screen name="County" component={County} />
-      <Tab.Screen name="State" component={State} />
-      <Tab.Screen name="Country" component={Country} />
-    </Tab.Navigator>
+    <View style={{flex: 1}}>
+      <FlatList
+        style={{ flex: 1 }}
+        data={route.params.data}
+        renderItem={({ item }) => (
+          <Item title={item.office} key={item.id} id={item.id} />
+        )}
+      />
+    </View>
+  );
+}
+
+function TopTabs({data}) {
+  return (
+    <View style={{flex: 1}}>
+      { data.countywide &&
+      <Tab.Navigator >
+        <Tab.Screen name="City" component={City} />
+        <Tab.Screen
+          name="County"
+          component={County}
+          initialParams={{'data': data.countywide}}
+        />
+        <Tab.Screen name="State" component={State} />
+        <Tab.Screen name="Country" component={Country} />
+      </Tab.Navigator>
+      }
+    </View>
   );
 }
 
