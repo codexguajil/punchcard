@@ -18,6 +18,23 @@ import { NavigationContainer } from "@react-navigation/native";
 
 const Tab = createMaterialTopTabNavigator();
 
+function Item({ title, id }) {
+  return (
+    <View style={styles.item}>
+      <Text style={styles.title}>{title}</Text>
+      <Icon
+        reverse
+        reverseColor="green"
+        name="checkbox-blank-circle-outline"
+        type="material-community"
+        color="lightblue"
+        size={12}
+        onPress={() => dispatch({ type: "toggleVote", id: id })}
+      />
+    </View>
+  );
+}
+
 function City() {
   return (
     <View>
@@ -26,18 +43,17 @@ function City() {
   );
 }
 
-function County() {
-  return (
-    <View>
-      <Text style={{ color: "red", fontSize: 24 }}>County</Text>
-    </View>
-  );
-}
 
-function State() {
+function State({data}) {
+  // console.log(data)
   return (
     <View>
       <Text style={{ color: "red", fontSize: 24 }}>State</Text>
+      {/* <FlatList
+        style={{ flex: 1 }}
+        data={data}
+        renderItem={({ item }) => <Item title={item.office} key={item.id} id={item.id} />}
+        /> */}
     </View>
   );
 }
