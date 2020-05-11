@@ -119,7 +119,7 @@ function TopTabs({data}) {
 function reducer(state, action) {
   switch (action.type) {
     case "toggleVote":
-      state.elections.forEach((election) => {
+      state.elections[action.name].forEach((election) => {
         if (election.id == action.id) {
           election.voted = !election.voted;
           console.log(election.voted);
@@ -172,7 +172,7 @@ let initialState = {elections: []};
 
 export function YourProfile({ navigation }) {
   const [state, dispatch] = useReducer(reducer, initialState)
-  
+
   useEffect(() => {
     if(!state.elections.length) {
       const getElections = async () => {
