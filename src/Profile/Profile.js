@@ -135,10 +135,10 @@ function reducer(state, action) {
 
       action.data.forEach(election => {
         if (
+          election.office != "U. S. Senator" &&
           election.district.scope === "statewide" ||
           election.district.scope === "stateUpper" ||
-          election.district.scope === "stateLower" &&
-          election.office != "U. S. Senator"
+          election.district.scope === "stateLower" 
         ) {
           stateContests.push(election);
         }
