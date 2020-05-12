@@ -4,7 +4,7 @@ import GestureRecognizer, {
 } from "react-native-swipe-gestures";
 import { useNavigation, DrawerActions } from "@react-navigation/native";
 import React, { Component, useState } from "react";
-import { createDrawerNavigator } from "@react-navigation/drawer";
+import { createDrawerNavigator, DrawerContentScrollView, DrawerItem } from "@react-navigation/drawer";
 import { createStackNavigator } from "@react-navigation/stack";
 import {
   StyleSheet,
@@ -48,9 +48,36 @@ function HomeStack() {
   );
 }
 
+function CustomDrawer(props) {
+  return (
+    <DrawerContentScrollView {...props}>
+      <DrawerItem
+        label="Your Profile"
+        onPress={() => props.navigation.navigate("Your Profile")}
+      />
+      <DrawerItem
+        label="Your City"
+        onPress={() => props.navigation.navigate("Your City")}
+      />
+      <DrawerItem
+        label="Your County"
+        onPress={() => props.navigation.navigate("Your County")}
+      />
+      <DrawerItem
+        label="Your State"
+        onPress={() => props.navigation.navigate("Your State")}
+      />
+      <DrawerItem
+        label="Your Country"
+        onPress={() => props.navigation.navigate("Your Country")}
+      />
+    </DrawerContentScrollView>
+  );
+}
+
 export function HomeScreen() {
   return (
-    <Drawer.Navigator drawerType="slide">
+    <Drawer.Navigator drawerContent={(props) => <CustomDrawer {...props}/>} drawerType="slide">
       <Drawer.Screen name="Home" component={HomeStack} />
       <Drawer.Screen name="Your Profile" component={YourProfile} />
       <Drawer.Screen name="Your City" component={CityStack} />
