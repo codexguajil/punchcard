@@ -13,6 +13,9 @@ import {
 } from "react-native";
 import { YourProfile } from "../Profile/Profile";
 import { CityStack } from "../City/City";
+import { StateStack } from '../State/State';
+import { CountyStack } from '../County/County';
+import { CountryStack } from '../Country/Country';
 
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -51,6 +54,9 @@ export function HomeScreen() {
       <Drawer.Screen name="Home" component={HomeStack} />
       <Drawer.Screen name="Your Profile" component={YourProfile} />
       <Drawer.Screen name="Your City" component={CityStack} />
+      <Drawer.Screen name="Your County" component={CountyStack} />
+      <Drawer.Screen name="Your State" component={StateStack} />
+      <Drawer.Screen name="Your Country" component={CountryStack} />
     </Drawer.Navigator>
   );
 }
