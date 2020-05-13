@@ -2,7 +2,7 @@ import "react-native-gesture-handler";
 import GestureRecognizer, {
   swipeDirections
 } from "react-native-swipe-gestures";
-import React, { Component, useState } from "react";
+import React, { Component, useState, useReducer } from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import {
   StyleSheet,
@@ -13,40 +13,42 @@ import {
   FlatList
 } from "react-native";
 import { Candidate } from '../Candidate/Candidate';
+import { reducer, initialState } from '../../utils/reducer';
 
 const Stack = createStackNavigator();
 
+function Item({ title }) {
+  return (
+    <TouchableHighlight onPress={() => navigation.navigate("Candidate")}>
+      <View style={styles.item}>
+        <Text style={styles.title}>{title}</Text>
+      </View>
+    </TouchableHighlight>
+  );
+}
+
 function YourCity({navigation}) {
+  const [state, dispatch] = useReducer(reducer, initialState);
+  // dispatch({type: 'returnState'})
+  console.log(state.elections.countywide)
+  // const Data = [
+  //   {
+  //     id: "1",
+  //     title: "Cynthia Lee",
+  //     img: "../../assets/profilepic1.jpeg"
+  //   },
+  //   {
+  //     id: "2",
+  //     title: "Berger Bohm",
+  //     img: "../../assets/profilepic2.jpeg"
+  //   },
+  //   {
+  //     id: "3",
+  //     title: "Anna Korber",
+  //     img: "../../assets/profilepic3.jpeg"
+  //   }
+  // ]
 
-  const Data = [
-    {
-      id: "1",
-      title: "Cynthia Lee",
-      img: "../../assets/profilepic1.jpeg"
-    },
-    {
-      id: "2",
-      title: "Berger Bohm",
-      img: "../../assets/profilepic2.jpeg"
-    },
-    {
-      id: "3",
-      title: "Anna Korber",
-      img: "../../assets/profilepic3.jpeg"
-    }
-  ]
-
-  function Item({title}) {
-    return (
-      <TouchableHighlight
-            onPress={() => navigation.navigate("Candidate")}
-          >
-          <View style={styles.item}>
-            <Text style={styles.title}>{title}</Text>
-            </View>
-      </TouchableHighlight>
-    );
-  }
 
   return (
     <View style={{ flex: 1 }}>
@@ -63,30 +65,30 @@ function YourCity({navigation}) {
       </View>
       <FlatList
         style={{ paddingTop: 15 }}
-        data={Data}
-        renderItem={({ item }) => <Item title={item.title} />}
+        data={state.elections.countywide}
+        renderItem={({ item }) => <Item title={item.office} />}
       />
     </View>
   );
 }
 
 export function CityStack({ navigation: { goBack } }) {
-         return (
-           <View style={{ flex: 1 }}>
-             <Stack.Navigator
-               initialRouteName="Your City"
-               screenOptions={{
-                 headerLeft: () => (
-                   <Button title="<" onPress={() => goBack()} />
-                 )
-               }}
-             >
-               <Stack.Screen name="Your City" component={YourCity} />
-               <Stack.Screen name="Candidate" component={Candidate} options={{headerShown: false, tabBarVisible: false}} />
-             </Stack.Navigator>
-           </View>
-         );
-       }
+  return (
+    <View style={{ flex: 1 }}>
+      <Stack.Navigator
+        initialRouteName="Your City"
+        screenOptions={{
+          headerLeft: () => (
+            <Button title="<" onPress={() => goBack()} />
+          )
+        }}
+      >
+        <Stack.Screen name="Your City" component={YourCity} />
+        <Stack.Screen name="Candidate" component={Candidate} options={{headerShown: false, tabBarVisible: false}} />
+      </Stack.Navigator>
+    </View>
+  );
+}
 
 const styles = StyleSheet.create({
   container: {
