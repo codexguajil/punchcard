@@ -2,7 +2,7 @@ import "react-native-gesture-handler";
 import GestureRecognizer, {
   swipeDirections
 } from "react-native-swipe-gestures";
-import React, { Component, useState } from "react";
+import React, { Component, useState, useReducer } from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import {
   StyleSheet,
@@ -13,37 +13,21 @@ import {
   FlatList
 } from "react-native";
 import { Candidate } from '../Candidate/Candidate';
+import { reducer, initialState } from '../../utils/reducer';
 
 const Stack = createStackNavigator();
 
-function YourState({navigation}) {
 
-  const Data = [
-    {
-      id: "1",
-      title: "Cynthia Lee",
-      img: "../../assets/profilepic1.jpeg"
-    },
-    {
-      id: "2",
-      title: "Berger Bohm",
-      img: "../../assets/profilepic2.jpeg"
-    },
-    {
-      id: "3",
-      title: "Anna Korber",
-      img: "../../assets/profilepic3.jpeg"
-    }
-  ]
-
-  function Item({title}) {
+function YourRegion({navigation, route}) {
+  const [state, dispatch] = useReducer(reducer, initialState);
+  // console.log(route)
+  // console.log(state.elections.countywide)
+  function Item({ title }) {
     return (
-      <TouchableHighlight
-            onPress={() => navigation.navigate("Candidate")}
-          >
-          <View style={styles.item}>
-            <Text style={styles.title}>{title}</Text>
-            </View>
+      <TouchableHighlight onPress={() => navigation.navigate("Candidate")}>
+        <View style={styles.item}>
+          <Text style={styles.title}>{title}</Text>
+        </View>
       </TouchableHighlight>
     );
   }
@@ -52,41 +36,41 @@ function YourState({navigation}) {
     <View style={{ flex: 1 }}>
       <View style={{ backgroundColor: "#243447", padding: 20 }}>
         <Text style={styles.paragraph}>
-          Your states's elections will be held on Monday, April the 15th, 2020.
+          Your city's elections will be held on Monday, April the 15th, 2020.
           Polls will be open from 8am - 5pm. Don't forget to set a reminder.
         </Text>
         <Text style={styles.paragraph}>
-          Your state will require that you bring these forms of id: - driver's
+          Your city will require that you bring these forms of id: - driver's
           license, id, or passport - proof of residence in the form of a bill -
           AND a social security card
         </Text>
       </View>
       <FlatList
         style={{ paddingTop: 15 }}
-        data={Data}
-        renderItem={({ item }) => <Item title={item.title} />}
+        data={state.elections[route.name]}
+        renderItem={({ item }) => <Item title={item.office} />}
       />
     </View>
   );
 }
 
-export function StateStack({ navigation: { goBack } }) {
-         return (
-           <View style={{ flex: 1 }}>
-             <Stack.Navigator
-               initialRouteName="Your State"
-               screenOptions={{
-                 headerLeft: () => (
-                   <Button title="<" onPress={() => goBack()} />
-                 )
-               }}
-             >
-               <Stack.Screen name="Your State" component={YourState} />
-               <Stack.Screen name="Candidate" component={Candidate} options={{headerShown: false, tabBarVisible: false}} />
-             </Stack.Navigator>
-           </View>
-         );
-       }
+export function RegionStack({ navigation: { goBack }, route }) {
+  return (
+    <View style={{ flex: 1 }}>
+      <Stack.Navigator
+        initialRouteName="Your City"
+        screenOptions={{
+          headerLeft: () => (
+            <Button title="<" onPress={() => goBack()} />
+          )
+        }}
+      >
+        <Stack.Screen name={route.params.scope} component={YourRegion} initialParams={route.params}/>
+        <Stack.Screen name="Candidate" component={Candidate} options={{headerShown: false, tabBarVisible: false}} />
+      </Stack.Navigator>
+    </View>
+  );
+}
 
 const styles = StyleSheet.create({
   container: {

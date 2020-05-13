@@ -12,10 +12,7 @@ import {
   View
 } from "react-native";
 import { YourProfile } from "../Profile/Profile";
-import { CityStack } from "../City/City";
-import { StateStack } from '../State/State';
-import { CountyStack } from '../County/County';
-import { CountryStack } from '../Country/Country';
+import { RegionStack } from "../Region/Region";
 
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -49,6 +46,7 @@ function HomeStack() {
 }
 
 function CustomDrawer(props) {
+  // console.log(props.state.routes)
   return (
     <DrawerContentScrollView {...props}>
       <DrawerItem
@@ -57,19 +55,19 @@ function CustomDrawer(props) {
       />
       <DrawerItem
         label="Your City"
-        onPress={() => props.navigation.navigate("Your City")}
+        onPress={() => {props.navigation.navigate("Your City", {scope: "countywide"})}}
       />
       <DrawerItem
         label="Your County"
-        onPress={() => props.navigation.navigate("Your County")}
+        onPress={() => props.navigation.navigate("Your County", {scope: "countywide"})}
       />
       <DrawerItem
         label="Your State"
-        onPress={() => props.navigation.navigate("Your State")}
+        onPress={() => props.navigation.navigate("Your State", {scope: "statewide"})}
       />
       <DrawerItem
         label="Your Country"
-        onPress={() => props.navigation.navigate("Your Country")}
+        onPress={() => props.navigation.navigate("Your Country", {scope: "nationwide"})}
       />
     </DrawerContentScrollView>
   );
@@ -80,10 +78,10 @@ export function HomeScreen() {
     <Drawer.Navigator drawerContent={(props) => <CustomDrawer {...props}/>} drawerType="slide">
       <Drawer.Screen name="Home" component={HomeStack} />
       <Drawer.Screen name="Your Profile" component={YourProfile} />
-      <Drawer.Screen name="Your City" component={CityStack} />
-      <Drawer.Screen name="Your County" component={CountyStack} />
-      <Drawer.Screen name="Your State" component={StateStack} />
-      <Drawer.Screen name="Your Country" component={CountryStack} />
+      <Drawer.Screen name="Your City" component={RegionStack} />
+      <Drawer.Screen name="Your County" component={RegionStack} />
+      <Drawer.Screen name="Your State" component={RegionStack} />
+      <Drawer.Screen name="Your Country" component={RegionStack} />
     </Drawer.Navigator>
   );
 }
