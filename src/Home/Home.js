@@ -4,6 +4,7 @@ import GestureRecognizer, {
 } from "react-native-swipe-gestures";
 import { useNavigation, DrawerActions } from "@react-navigation/native";
 import React, { Component, useState } from "react";
+import { Image } from "react-native-elements";
 import { createDrawerNavigator, DrawerContentScrollView, DrawerItem } from "@react-navigation/drawer";
 import { createStackNavigator } from "@react-navigation/stack";
 import {
@@ -35,12 +36,23 @@ function HomeStack() {
     <Stack.Navigator
       screenOptions={{
         headerStyle: {
-          backgroundColor: "#243447"
+          backgroundColor: "#243447",
         },
-        headerTintColor: "#fff"
+        headerTintColor: "#fff",
       }}
     >
-      <Stack.Screen name="Feed" component={HomeContent} />
+      <Stack.Screen
+        name="Feed"
+        component={HomeContent}
+        options={{
+          headerLeft: () => (
+            <Image
+              source={require("../../assets/profilepic.jpeg")}
+              style={styles.headerIcon}
+            />
+          ),
+        }}
+      />
     </Stack.Navigator>
   );
 }
@@ -97,6 +109,12 @@ const styles = StyleSheet.create({
   },
   containertwo: {
     flex: 1
+  },
+  headerIcon: {
+    width: 32,
+    height: 32,
+    borderRadius: 16,
+    marginLeft: 15
   },
   item: {
     backgroundColor: "#243447",
