@@ -15,6 +15,7 @@ import {
 } from "react-native";
 import { YourProfile } from "../Profile/Profile";
 import { RegionStack } from "../Region/Region";
+import { Feed } from "./Feed.js";
 
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -26,7 +27,7 @@ function HomeContent() {
       onSwipeRight={() => navigation.dispatch(DrawerActions.openDrawer())}
     >
       <View style={styles.containertwo}>
-        <Text style={styles.title}>Hello</Text>
+        <Feed style={{flex: 1}}/>
       </View>
     </GestureRecognizer>
   );
@@ -65,26 +66,40 @@ function HomeStack({navigation}) {
 function CustomDrawer(props) {
   // console.log(props.state.routes)
   return (
-    <DrawerContentScrollView {...props}>
+    <DrawerContentScrollView {...props} contentContainerStyle={{ flex: 1 }}>
       <DrawerItem
-        label="Your Profile"
+        style={{ paddingBottom: 150 }}
+        label={() => (
+          <Image
+            source={require("../../assets/profilepic.jpeg")}
+            style={styles.drawerIcon}
+          />
+        )}
         onPress={() => props.navigation.navigate("Your Profile")}
       />
       <DrawerItem
         label="Your City"
-        onPress={() => {props.navigation.navigate("Your City", {scope: "countywide"})}}
+        onPress={() => {
+          props.navigation.navigate("Your City", { scope: "countywide" });
+        }}
       />
       <DrawerItem
         label="Your County"
-        onPress={() => props.navigation.navigate("Your County", {scope: "countywide"})}
+        onPress={() =>
+          props.navigation.navigate("Your County", { scope: "countywide" })
+        }
       />
       <DrawerItem
         label="Your State"
-        onPress={() => props.navigation.navigate("Your State", {scope: "statewide"})}
+        onPress={() =>
+          props.navigation.navigate("Your State", { scope: "statewide" })
+        }
       />
       <DrawerItem
         label="Your Country"
-        onPress={() => props.navigation.navigate("Your Country", {scope: "nationwide"})}
+        onPress={() =>
+          props.navigation.navigate("Your Country", { scope: "nationwide" })
+        }
       />
     </DrawerContentScrollView>
   );
@@ -119,6 +134,12 @@ const styles = StyleSheet.create({
     width: 32,
     height: 32,
     borderRadius: 16,
+    marginLeft: 15
+  },
+  drawerIcon: {
+    width: 60,
+    height: 60,
+    borderRadius: 30,
     marginLeft: 15
   },
   item: {
