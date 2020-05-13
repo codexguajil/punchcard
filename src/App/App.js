@@ -1,11 +1,13 @@
 import "react-native-gesture-handler";
 import GestureRecognizer, { swipeDirections } from 'react-native-swipe-gestures';
-import React from 'react';
+import React, { useEffect, useReducer } from 'react';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { StyleSheet, Text, View, Image } from 'react-native';
+import { fetchMethod, addId } from "../../utils/fetch";
+import { reducer, initialState } from "../../utils/reducer";
 import { HomeScreen } from '../Home/Home';
 import { Icon } from 'react-native-elements';
 
@@ -30,44 +32,57 @@ const MyTheme = {
   }
 };
   
-  export default function App() {
-    return (
-      <NavigationContainer theme={MyTheme}>
-        <Tab.Navigator
-          tabBarOptions={{
-            showLabel: false,
+export default function App() {
+  const [state, dispatch] = useReducer(reducer, initialState);
+
+  useEffect(() => {
+    if (!state.elections.length) {
+      const getElections = async () => {
+        const data = await fetchMethod();
+        const elections = addId(data.contests);
+        dispatch({ type: "setElections", data: elections });
+      };
+      getElections();
+    }
+  }, [fetchMethod]);
+
+  return (
+    <NavigationContainer theme={MyTheme}>
+      <Tab.Navigator
+        tabBarOptions={{
+          showLabel: false,
+        }}
+        initialRouteName={("Main", { screen: "Home" })}
+      >
+        <Tab.Screen
+          name="Main"
+          component={HomeScreen}
+          options={{
+            tabBarIcon: () => (
+              <Icon
+                name="home"
+                color="white"
+                size={30}
+              />
+            ),
           }}
-          initialRouteName={("Main", { screen: "Home" })}
-        >
-          <Tab.Screen
-            name="Main"
-            component={HomeScreen}
-            options={{
-              tabBarIcon: () => (
-                <Icon
-                  name="home"
-                  color="white"
-                  size={30}
-                />
-              ),
-            }}
-          />
-          <Tab.Screen
-            name="Notifications"
-            component={Notifications}
-            options={{
-              tabBarIcon: () => (
-                <Icon
-                  name="notifications"
-                  color="white"
-                  size={30}
-                />
-              ),
-            }}
-          />
-        </Tab.Navigator>
-      </NavigationContainer>
-    );
+        />
+        <Tab.Screen
+          name="Notifications"
+          component={Notifications}
+          options={{
+            tabBarIcon: () => (
+              <Icon
+                name="notifications"
+                color="white"
+                size={30}
+              />
+            ),
+          }}
+        />
+      </Tab.Navigator>
+    </NavigationContainer>
+  );
 }
 
 const styles = StyleSheet.create({
