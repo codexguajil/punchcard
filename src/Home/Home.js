@@ -10,7 +10,8 @@ import { createStackNavigator } from "@react-navigation/stack";
 import {
   StyleSheet,
   Text,
-  View
+  View,
+  TouchableOpacity
 } from "react-native";
 import { YourProfile } from "../Profile/Profile";
 import { RegionStack } from "../Region/Region";
@@ -31,7 +32,7 @@ function HomeContent() {
   );
 }
 
-function HomeStack() {
+function HomeStack({navigation}) {
   return (
     <Stack.Navigator
       screenOptions={{
@@ -46,10 +47,14 @@ function HomeStack() {
         component={HomeContent}
         options={{
           headerLeft: () => (
-            <Image
-              source={require("../../assets/profilepic.jpeg")}
-              style={styles.headerIcon}
-            />
+            <TouchableOpacity
+              onPress={() => navigation.dispatch(DrawerActions.openDrawer())}
+            >
+              <Image
+                source={require("../../assets/profilepic.jpeg")}
+                style={styles.headerIcon}
+              />
+            </TouchableOpacity>
           ),
         }}
       />
