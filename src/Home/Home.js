@@ -27,7 +27,7 @@ function HomeContent() {
       onSwipeRight={() => navigation.dispatch(DrawerActions.openDrawer())}
     >
       <View style={styles.containertwo}>
-        <Feed style={{flex: 1}}/>
+        <Feed />
       </View>
     </GestureRecognizer>
   );
@@ -128,7 +128,8 @@ const styles = StyleSheet.create({
     borderBottomWidth: StyleSheet.hairlineWidth
   },
   containertwo: {
-    flex: 1
+    flex: 1,
+    paddingTop: 10
   },
   headerIcon: {
     width: 32,
