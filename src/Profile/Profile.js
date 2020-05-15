@@ -18,9 +18,9 @@ import { reducer, initialState } from '../../utils/reducer';
 
 const Tab = createMaterialTopTabNavigator();
 
-function Item({ title, id, name }) {
-  const [state, dispatch] = useReducer(reducer, initialState);
-
+function Item({ title, id, name, voted, dispatch }) {
+  // const [state, dispatch] = useReducer(reducer, initialState);
+  console.log(voted)
   return (
     <View style={styles.item}>
       <Text style={styles.title}>{title}</Text>
@@ -49,23 +49,44 @@ function Item({ title, id, name }) {
   );
 }
 
-function City() {
+function City({route}) {
+  const [state, dispatch] = useReducer(reducer, initialState);
   return (
-    <View>
-      <Text style={{ color: "red", fontSize: 24 }}>City</Text>
+    <View style={{ flex: 1 }}>
+      <FlatList
+        style={{ flex: 1 }}
+        data={state.elections.citywide}
+        renderItem={({ item }) => (
+          <Item
+            title={item.office}
+            voted={item.voted}
+            key={item.id}
+            id={item.id}
+            name="citywide"
+            dispatch={dispatch}
+          />
+        )}
+      />
     </View>
   );
 }
 
-
 function State({route}) {
+  const [state, dispatch] = useReducer(reducer, initialState);
   return (
-    <View style={{flex: 1}}>
+    <View style={{ flex: 1 }}>
       <FlatList
         style={{ flex: 1 }}
-        data={route.params.data}
+        data={state.elections.statewide}
         renderItem={({ item }) => (
-          <Item title={item.office} key={item.id} id={item.id} name="statewide"/>
+          <Item
+            title={item.office}
+            voted={item.voted}
+            key={item.id}
+            id={item.id}
+            name="statewide"
+            dispatch={dispatch}
+          />
         )}
       />
     </View>
@@ -73,13 +94,21 @@ function State({route}) {
 }
 
 function Country({route}) {
+  const [state, dispatch] = useReducer(reducer, initialState);
   return (
-    <View style={{flex: 1}}>
+    <View style={{ flex: 1 }}>
       <FlatList
         style={{ flex: 1 }}
-        data={route.params.data}
+        data={state.elections.nationwide}
         renderItem={({ item }) => (
-          <Item title={item.office} key={item.id} id={item.id} name="nationwide"/>
+          <Item
+            title={item.office}
+            voted={item.voted}
+            key={item.id}
+            id={item.id}
+            name="nationwide"
+            dispatch={dispatch}
+          />
         )}
       />
     </View>
@@ -87,13 +116,21 @@ function Country({route}) {
 }
 
 function County({route}) {
+  const [state, dispatch] = useReducer(reducer, initialState);
   return (
-    <View style={{flex: 1}}>
+    <View style={{ flex: 1 }}>
       <FlatList
         style={{ flex: 1 }}
-        data={route.params.data}
+        data={state.elections.countywide}
         renderItem={({ item }) => (
-          <Item title={item.office} key={item.id} id={item.id} name="countywide"/>
+          <Item
+            title={item.office}
+            voted={item.voted}
+            key={item.id}
+            id={item.id}
+            name="countywide"
+            dispatch={dispatch}
+          />
         )}
       />
     </View>
@@ -101,34 +138,37 @@ function County({route}) {
 }
 
 function TopTabs({data}) {
+  // const [state, dispatch] = useReducer(reducer, initialState)
   return (
     <View style={{ flex: 1 }}>
-      {data.countywide && (
+      {/* {state.elections.countywide && ( */}
         <Tab.Navigator>
-          <Tab.Screen name="City" component={City} />
+          <Tab.Screen 
+            name="City" 
+            component={City} 
+            />
           <Tab.Screen
             name="County"
             component={County}
-            initialParams={{ data: data.countywide }}
+            
           />
           <Tab.Screen
             name="State"
             component={State}
-            initialParams={{ data: data.statewide }}
+            
           />
           <Tab.Screen
             name="Country"
             component={Country}
-            initialParams={{ data: data.nationwide }}
+            
           />
         </Tab.Navigator>
-      )}
+      {/* )} */}
     </View>
   );
 }
 
 export function YourProfile({ navigation }) {
-  const [state, dispatch] = useReducer(reducer, initialState)
 
   return (
     <View style={styles.containertwo}>
@@ -168,7 +208,7 @@ export function YourProfile({ navigation }) {
           </TouchableHighlight>
         </View>
       </GestureRecognizer>
-      <TopTabs data={state.elections} />
+      <TopTabs />
     </View>
   );
 }
