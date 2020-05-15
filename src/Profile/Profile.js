@@ -12,7 +12,6 @@ import {
   TouchableHighlight,
   FlatList
 } from "react-native";
-// import { fetchMethod, addId } from "../../utils/fetch";
 import { Icon } from "react-native-elements";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 import { reducer, initialState } from '../../utils/reducer';
@@ -25,15 +24,27 @@ function Item({ title, id, name }) {
   return (
     <View style={styles.item}>
       <Text style={styles.title}>{title}</Text>
-      <Icon
-        reverse
-        reverseColor="lightblue"
-        name="checkbox-blank-circle-outline"
-        type="material-community"
-        color="lightblue"
-        size={12}
-        onPress={() => dispatch({type: 'toggleVote', id: id, name: name})}
-      />
+      {voted ? (
+        <Icon
+          reverse
+          reverseColor="lightblue"
+          color="lightblue"
+          name="checkbox-blank-circle-outline"
+          type="material-community"
+          size={12}
+          onPress={() => dispatch({ type: "toggleVote", id: id, name: name })}
+        />
+      ) : (
+        <Icon
+          reverse
+          reverseColor="red"
+          color="red"
+          name="checkbox-blank-circle-outline"
+          type="material-community"
+          size={12}
+          onPress={() => dispatch({ type: "toggleVote", id: id, name: name })}
+        />
+      )}
     </View>
   );
 }

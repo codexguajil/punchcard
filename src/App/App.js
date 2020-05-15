@@ -44,7 +44,7 @@ export default function App() {
       };
       getElections();
     }
-  }, [fetchMethod]);
+  }, [fetchMethod, reducer]);
 
   return (
     <NavigationContainer theme={MyTheme}>
