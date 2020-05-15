@@ -10,7 +10,52 @@ export function reducer(state, action) {
       });
       return { elections: state.elections };
     case "setElections":
-      const cityContests = [];
+      const cityContests = [
+        {
+          office: "Mayor",
+          district: {
+            scope: "citywide",
+          },
+          id: "50",
+          candidates: [
+            {
+              name: "Betsy Price",
+              party: "nonpartisan",
+            },
+            {
+              name: "Deborah Peoples",
+              party: "nonpartisan",
+            },
+            {
+              name: "James McBride",
+              party: "nonpartisan",
+            },
+            {
+              name: "Mike Haynes",
+              party: "nonpartisan (write-in)",
+            },
+          ],
+          voted: false
+        },
+        {
+          office: "City Council District 2",
+          district: {
+            scope: "citywide"
+          },
+          id: "51",
+          candidates: [
+            {
+              name: "Carlos E. Flores",
+              party: "nonpartisan"
+            },
+            {
+              name: "Jennifer Trevino",
+              party: "nonpartisan"
+            }
+          ],
+          voted: false
+        }
+      ];
       const countyContests = [];
       const stateContests = [];
       const countryContests = [];
@@ -39,22 +84,22 @@ export function reducer(state, action) {
       });
       initialState = {
         elections: {
+          citywide: cityContests,
           countywide: countyContests,
           statewide: stateContests,
           nationwide: countryContests,
-        },
+        }
       };
       return {
         elections: {
+          citywide: cityContests,
           countywide: countyContests,
           statewide: stateContests,
           nationwide: countryContests,
-        },
+        }
       };
-    case "returnState":
-      return { elections: state.elections };
     default:
-      throw new Error();
+      return state;
   }
 }
 

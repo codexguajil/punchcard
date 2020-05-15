@@ -20,8 +20,6 @@ const Stack = createStackNavigator();
 
 function YourRegion({navigation, route}) {
   const [state, dispatch] = useReducer(reducer, initialState);
-  // console.log(route)
-  // console.log(state.elections.countywide)
   function Item({ title }) {
     return (
       <TouchableHighlight onPress={() => navigation.navigate("Candidate")}>
@@ -58,7 +56,7 @@ export function RegionStack({ navigation: { goBack }, route }) {
   return (
     <View style={{ flex: 1 }}>
       <Stack.Navigator
-        initialRouteName="Your City"
+        // initialRouteName="Your City"
         screenOptions={{
           headerLeft: () => (
             <Button title="<" onPress={() => goBack()} />
@@ -71,6 +69,8 @@ export function RegionStack({ navigation: { goBack }, route }) {
     </View>
   );
 }
+
+// council also appoints the city secretary, city attorney, city auditor, municipal court judges and residents who serve on city boards and commissions.
 
 const styles = StyleSheet.create({
   container: {

@@ -80,7 +80,7 @@ function CustomDrawer(props) {
       <DrawerItem
         label="Your City"
         onPress={() => {
-          props.navigation.navigate("Your City", { scope: "countywide" });
+          props.navigation.navigate("Your City", { scope: "citywide" });
         }}
       />
       <DrawerItem
