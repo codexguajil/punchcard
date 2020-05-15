@@ -19,8 +19,6 @@ import { reducer, initialState } from '../../utils/reducer';
 const Tab = createMaterialTopTabNavigator();
 
 function Item({ title, id, name, voted, dispatch }) {
-  // const [state, dispatch] = useReducer(reducer, initialState);
-  console.log(voted)
   return (
     <View style={styles.item}>
       <Text style={styles.title}>{title}</Text>
@@ -49,7 +47,7 @@ function Item({ title, id, name, voted, dispatch }) {
   );
 }
 
-function City({route}) {
+function City() {
   const [state, dispatch] = useReducer(reducer, initialState);
   return (
     <View style={{ flex: 1 }}>
@@ -71,7 +69,7 @@ function City({route}) {
   );
 }
 
-function State({route}) {
+function State() {
   const [state, dispatch] = useReducer(reducer, initialState);
   return (
     <View style={{ flex: 1 }}>
@@ -93,7 +91,7 @@ function State({route}) {
   );
 }
 
-function Country({route}) {
+function Country() {
   const [state, dispatch] = useReducer(reducer, initialState);
   return (
     <View style={{ flex: 1 }}>
@@ -115,7 +113,7 @@ function Country({route}) {
   );
 }
 
-function County({route}) {
+function County() {
   const [state, dispatch] = useReducer(reducer, initialState);
   return (
     <View style={{ flex: 1 }}>
@@ -137,33 +135,27 @@ function County({route}) {
   );
 }
 
-function TopTabs({data}) {
-  // const [state, dispatch] = useReducer(reducer, initialState)
+function TopTabs() {
   return (
     <View style={{ flex: 1 }}>
-      {/* {state.elections.countywide && ( */}
         <Tab.Navigator>
           <Tab.Screen 
             name="City" 
             component={City} 
-            />
+          />
           <Tab.Screen
             name="County"
             component={County}
-            
           />
           <Tab.Screen
             name="State"
             component={State}
-            
           />
           <Tab.Screen
             name="Country"
             component={Country}
-            
           />
         </Tab.Navigator>
-      {/* )} */}
     </View>
   );
 }
