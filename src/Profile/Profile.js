@@ -35,8 +35,8 @@ function Item({ title, id, name, voted, dispatch }) {
       ) : (
         <Icon
           reverse
-          reverseColor="red"
-          color="red"
+          reverseColor="gray"
+          color="gray"
           name="checkbox-blank-circle-outline"
           type="material-community"
           size={12}
@@ -161,7 +161,6 @@ function TopTabs() {
 }
 
 export function YourProfile({ navigation }) {
-
   return (
     <View style={styles.containertwo}>
       <GestureRecognizer
