@@ -10,16 +10,9 @@ import { fetchMethod, addId } from "../../utils/fetch";
 import { reducer, initialState } from "../../utils/reducer";
 import { HomeScreen } from '../Home/Home';
 import { Icon } from 'react-native-elements';
+import { NotificationsStack } from '../Notifications/Notifications';
 
 const Tab = createBottomTabNavigator();
-
-function Notifications() {
-  return (
-    <View>
-      <Text style={styles.title}>Notifications</Text>
-    </View>
-  );
-}
 
 const MyTheme = {
   dark: true,
@@ -69,7 +62,7 @@ export default function App() {
         />
         <Tab.Screen
           name="Notifications"
-          component={Notifications}
+          component={NotificationsStack}
           options={{
             tabBarIcon: () => (
               <Icon
