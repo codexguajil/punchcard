@@ -29,6 +29,12 @@ function YourRegion({navigation, route}) {
     );
   }
 
+  const Data = [
+          "- driver's license, id, or passport" ,
+          "- proof of residence in the form of a bill" ,
+          "- AND a social security card",
+  ]
+
   return (
     <GestureRecognizer
       style={{ flex: 1 }}
@@ -40,10 +46,13 @@ function YourRegion({navigation, route}) {
           Polls will be open from 8am - 5pm. Don't forget to set a reminder.
         </Text>
         <Text style={styles.paragraph}>
-          Your city will require that you bring these forms of id: - driver's
-          license, id, or passport - proof of residence in the form of a bill -
-          AND a social security card
+          Your city will require that you bring these forms of id:
         </Text>
+        <FlatList
+          style={styles.paragraph}
+          data={Data}
+          renderItem={({item}) => <Text style={styles.paragraph}>{item}</Text>}
+        />
       </View>
       <FlatList
         style={{ paddingTop: 15 }}
