@@ -1,8 +1,5 @@
 import "react-native-gesture-handler";
-import GestureRecognizer, {
-  swipeDirections
-} from "react-native-swipe-gestures";
-import React, { Component, useState, useReducer } from "react";
+import React, { useReducer } from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import {
   StyleSheet,

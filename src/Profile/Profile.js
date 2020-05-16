@@ -1,8 +1,6 @@
 import "react-native-gesture-handler";
-import GestureRecognizer, {
-  swipeDirections
-} from "react-native-swipe-gestures";
-import React, { useEffect, useReducer } from "react";
+import GestureRecognizer from "react-native-swipe-gestures";
+import React, { useReducer } from "react";
 import { DrawerActions } from "@react-navigation/native";
 import {
   StyleSheet,

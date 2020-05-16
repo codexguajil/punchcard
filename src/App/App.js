@@ -1,11 +1,7 @@
 import "react-native-gesture-handler";
-import GestureRecognizer, { swipeDirections } from 'react-native-swipe-gestures';
 import React, { useEffect, useReducer } from 'react';
-import { createDrawerNavigator } from '@react-navigation/drawer';
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
-import { StyleSheet, Text, View, Image } from 'react-native';
 import { fetchMethod, addId } from "../../utils/fetch";
 import { reducer, initialState } from "../../utils/reducer";
 import { HomeScreen } from '../Home/Home';
@@ -18,11 +14,11 @@ const MyTheme = {
   dark: true,
   colors: {
     primary: "white",
-    background: "#101820",
+    background: "#1B2737",
     card: "#243447",
     text: "white",
-    border: "gray"
-  }
+    border: "gray",
+  },
 };
   
 export default function App() {
@@ -77,38 +73,3 @@ export default function App() {
     </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 0.5,
-    backgroundColor: "#243447",
-    flexDirection: "row",
-    justifyContent: "space-between",
-    borderBottomColor: "gray",
-    borderBottomWidth: StyleSheet.hairlineWidth
-  },
-  containertwo: {
-    flex: 1
-  },
-  item: {
-    backgroundColor: "#243447",
-    padding: 20,
-    borderBottomColor: "gray",
-    borderBottomWidth: StyleSheet.hairlineWidth
-  },
-  textInput: {
-    backgroundColor: "#fff",
-    height: 40,
-    borderBottomColor: "#000000",
-    borderBottomWidth: 1,
-    width: 200
-  },
-  title: {
-    fontSize: 46,
-    color: "#fff"
-  },
-  button: {
-    backgroundColor: "#fff",
-    borderRadius: 3
-  }
-});

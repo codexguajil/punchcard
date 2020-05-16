@@ -1,15 +1,12 @@
 import "react-native-gesture-handler";
-import GestureRecognizer, {
-  swipeDirections
-} from "react-native-swipe-gestures";
+import GestureRecognizer from "react-native-swipe-gestures";
 import { useNavigation, DrawerActions } from "@react-navigation/native";
-import React, { Component, useState } from "react";
+import React from "react";
 import { Image } from "react-native-elements";
 import { createDrawerNavigator, DrawerContentScrollView, DrawerItem } from "@react-navigation/drawer";
 import { createStackNavigator } from "@react-navigation/stack";
 import {
   StyleSheet,
-  Text,
   View,
   TouchableOpacity
 } from "react-native";
