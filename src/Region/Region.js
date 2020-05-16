@@ -1,5 +1,7 @@
 import "react-native-gesture-handler";
 import React, { useReducer } from "react";
+import GestureRecognizer from "react-native-swipe-gestures";
+import { DrawerActions } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import {
   StyleSheet,
@@ -19,16 +21,19 @@ function YourRegion({navigation, route}) {
   const [state, dispatch] = useReducer(reducer, initialState);
   function Item({ title }) {
     return (
-      <TouchableHighlight onPress={() => navigation.navigate("Candidate")}>
-        <View style={styles.item}>
-          <Text style={styles.title}>{title}</Text>
-        </View>
-      </TouchableHighlight>
+        <TouchableHighlight onPress={() => navigation.navigate("Candidate")}>
+          <View style={styles.item}>
+            <Text style={styles.title}>{title}</Text>
+          </View>
+        </TouchableHighlight>
     );
   }
 
   return (
-    <View style={{ flex: 1 }}>
+    <GestureRecognizer
+      style={{ flex: 1 }}
+      onSwipeRight={() => navigation.dispatch(DrawerActions.openDrawer())}
+    >
       <View style={{ backgroundColor: "#243447", padding: 20 }}>
         <Text style={styles.paragraph}>
           Your city's elections will be held on Monday, April the 15th, 2020.
@@ -45,7 +50,7 @@ function YourRegion({navigation, route}) {
         data={state.elections[route.name]}
         renderItem={({ item }) => <Item title={item.office} />}
       />
-    </View>
+    </GestureRecognizer>
   );
 }
 
@@ -53,7 +58,6 @@ export function RegionStack({ navigation: { goBack }, route }) {
   return (
     <View style={{ flex: 1 }}>
       <Stack.Navigator
-        // initialRouteName="Your City"
         screenOptions={{
           headerLeft: () => (
             <Button title="<" onPress={() => goBack()} />
