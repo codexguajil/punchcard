@@ -26,10 +26,17 @@ export function Candidate({navigation}) {
   ]
 
   return (
-    <View style={{ flex: 1 }}>
-      <Image resizeMode="cover" style={styles.image} source={require("../../assets/profilepic1a.jpg")} />
-      <TouchableHighlight style={styles.button} onPress={() => navigation.goBack()}>
-        <Text style={styles.text}>Back</Text>
+    <ScrollView style={{ flex: 1 }}>
+      <Image
+        resizeMode="cover"
+        style={styles.image}
+        source={require("../../assets/profilepic1a.jpg")}
+      />
+      <TouchableHighlight
+        style={styles.button}
+        onPress={() => navigation.goBack()}
+      >
+        <Text style={styles.title}>Back</Text>
       </TouchableHighlight>
     </View>
   );
