@@ -38,22 +38,75 @@ export function Candidate({navigation}) {
       >
         <Text style={styles.title}>Back</Text>
       </TouchableHighlight>
-    </View>
+      <View style={styles.container}>
+        <Text style={styles.subheader}>On The Issues:</Text>
+        <FlatList
+          style={styles.paragraph}
+          data={Data}
+          renderItem={({ item }) => (
+            <Text style={styles.paragraph}>{item}</Text>
+          )}
+        />
+      </View>
+      <View style={styles.container}>
+        <Text style={styles.subheader}>Voting Record</Text>
+        <FlatList
+          style={styles.paragraph}
+          data={Data2}
+          renderItem={({ item }) => (
+            <View style={{flexDirection: 'row'}}>
+              <Text style={styles.item}>{item}</Text>
+              <Text style={styles.appendix}>?</Text>
+            </View>
+          )}
+        />
+      </View>
+    </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
+  container: {
+    padding: 15,
+  },
   image: {
-    height: 300,
-    flex: 0.7,
-    width: null
+    height: 400,
+    flex: 1,
+    width: null,
   },
   button: {
-    position: 'absolute',
-    margin: 20
+    position: "absolute",
+    margin: 20,
   },
-  text: {
+  subheader: {
+    fontSize: 24,
+    color: "#fff",
+    marginBottom: 10,
+    fontWeight: "400",
+  },
+  title: {
     fontSize: 32,
-    color: '#fff',
-  }
+    color: "#fff",
+  },
+  paragraph: {
+    fontSize: 13,
+    color: "#fff",
+    lineHeight: 18,
+    fontWeight: "300",
+  },
+  item: {
+    fontSize: 22,
+    paddingRight: 30,
+    paddingLeft: 2,
+    color: "#fff",
+  },
+  appendix: {
+    color: "#fff",
+    position: "absolute",
+    marginLeft: 150,
+    alignSelf: "center",
+    fontSize: 16,
+    fontWeight: 'bold',
+    textDecorationLine: 'underline'
+  },
 });
