@@ -4,6 +4,7 @@ import {
   Text,
   View,
   TouchableHighlight,
+  TouchableOpacity,
   Image,
   FlatList,
   ScrollView,
@@ -27,6 +28,12 @@ export function Candidate({navigation}) {
     "Bill 501 - No"
   ]
 
+  const billSummary = [
+    "- Funding for science and SAT tutoring for public school students in your district.", 
+    "- 1 billion dollars for road repair on Main St.", 
+    "- Lowers taxes on families earning less than 230k.",
+  ]
+
   return (
     <ScrollView style={{ flex: 1 }}>
       <Image
@@ -40,6 +47,7 @@ export function Candidate({navigation}) {
       >
         <Text style={styles.title}>Back</Text>
       </TouchableHighlight>
+      <View style={{paddingBottom: 40}}>
       <View style={styles.container}>
         <Text style={styles.subheader}>On The Issues:</Text>
         <FlatList
@@ -58,31 +66,47 @@ export function Candidate({navigation}) {
           renderItem={({ item }) => (
             <View style={{ flexDirection: "row" }}>
               <Text style={styles.item}>{item}</Text>
-              <TouchableHighlight
+              <TouchableOpacity
                 style={styles.moreBtn}
                 onPress={() => {
                   setModalVisible(true);
                 }}
               >
-                <View style={{width: 55, height: 25}}>
+                <View style={{ width: 55, height: 25 }}>
                   <Text style={styles.appendix}>?</Text>
                 </View>
-              </TouchableHighlight>
+              </TouchableOpacity>
               <Modal
                 animationType="fade"
                 transparent={true}
                 visible={modalVisible}
               >
-                <View style={styles.centeredView}>
-                  <TouchableHighlight
-                    style={{backgroundColor: "purple"}}
-                    onPress={() => setModalVisible(!modalVisible)}
-                  >
-                <View style={styles.modalView}>
-                    <Text>Information</Text>
-                </View>
-                  </TouchableHighlight>
-                </View>
+                <TouchableHighlight
+                  style={styles.centeredView}
+                  onPress={() => setModalVisible(!modalVisible)}
+                >
+                  <View style={styles.modalView}>
+                    <Text
+                      style={{
+                        fontSize: 16,
+                        fontWeight: "600",
+                        color: "#36454F",
+                        marginBottom: 8
+                      }}
+                    >
+                      Includes:
+                    </Text>
+                    <FlatList
+                      style={{ flexGrow: 0, flex: 0 }}
+                      data={billSummary}
+                      renderItem={({ item }) => (
+                        <Text style={{ color: "#414a4c", fontWeight: "500", flex: 1, paddingBottom: 5 }}>
+                          {item}
+                        </Text>
+                      )}
+                    />
+                  </View>
+                </TouchableHighlight>
               </Modal>
             </View>
           )}
@@ -99,6 +123,7 @@ export function Candidate({navigation}) {
           jobs throughout the next industrial revolution.
         </Text>
       </View>
+      </View>
     </ScrollView>
   );
 }
@@ -108,22 +133,20 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    marginTop: 22,
   },
   modalView: {
     margin: 20,
-    backgroundColor: "green",
+    backgroundColor: "white",
     borderRadius: 20,
-    padding: 35,
-    alignItems: "center",
-    shadowColor: "#000",
+    padding: 15,
+    shadowColor: "black",
     shadowOffset: {
-      width: 0,
+      width: 2,
       height: 2,
     },
-    shadowOpacity: 0.25,
+    shadowOpacity: 1,
     shadowRadius: 3.84,
-    elevation: 5,
+    elevation: 155,
   },
   container: {
     padding: 15,
