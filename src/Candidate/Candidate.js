@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   StyleSheet,
   Text,
@@ -6,10 +6,12 @@ import {
   TouchableHighlight,
   Image,
   FlatList,
-  ScrollView
+  ScrollView,
+  Modal
 } from "react-native";
 
 export function Candidate({navigation}) {
+  const [modalVisible, setModalVisible] = useState(false);
   const Data = [
     "Healthcare - Public over private",
     "Economy - End Wall St. subsidies, rejuvenate middle class",
@@ -54,26 +56,75 @@ export function Candidate({navigation}) {
           style={styles.paragraph}
           data={Data2}
           renderItem={({ item }) => (
-            <View style={{flexDirection: 'row'}}>
+            <View style={{ flexDirection: "row" }}>
               <Text style={styles.item}>{item}</Text>
-              <Text style={styles.appendix}>?</Text>
+              <TouchableHighlight
+                style={styles.moreBtn}
+                onPress={() => {
+                  setModalVisible(true);
+                }}
+              >
+                <View style={{width: 55, height: 25}}>
+                  <Text style={styles.appendix}>?</Text>
+                </View>
+              </TouchableHighlight>
+              <Modal
+                animationType="fade"
+                transparent={true}
+                visible={modalVisible}
+              >
+                <View style={styles.centeredView}>
+                  <TouchableHighlight
+                    style={{backgroundColor: "purple"}}
+                    onPress={() => setModalVisible(!modalVisible)}
+                  >
+                <View style={styles.modalView}>
+                    <Text>Information</Text>
+                </View>
+                  </TouchableHighlight>
+                </View>
+              </Modal>
             </View>
           )}
         />
       </View>
-        <View style={styles.container}>
-          <Text style={styles.subheader}>
-              Why you should vote for me
-          </Text>
-          <Text style={styles.paragraph}>
-            In my duties as a community organizer with ten years of experience I prioritized the health and financial well-being of my neighbors. My passion for better representation has motivated me to push for government transparency with Bill 101 and my extensive experience working in ThinkTech International has prepared me to fight for your jobs throughout the next industrial revolution.
-          </Text>
-        </View>
+      <View style={styles.container}>
+        <Text style={styles.subheader}>Why you should vote for me</Text>
+        <Text style={styles.paragraph}>
+          In my duties as a community organizer with ten years of experience I
+          prioritized the health and financial well-being of my neighbors. My
+          passion for better representation has motivated me to push for
+          government transparency with Bill 101 and my extensive experience
+          working in ThinkTech International has prepared me to fight for your
+          jobs throughout the next industrial revolution.
+        </Text>
+      </View>
     </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
+  centeredView: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: 22,
+  },
+  modalView: {
+    margin: 20,
+    backgroundColor: "green",
+    borderRadius: 20,
+    padding: 35,
+    alignItems: "center",
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
+  },
   container: {
     padding: 15,
   },
@@ -110,11 +161,14 @@ const styles = StyleSheet.create({
   },
   appendix: {
     color: "#fff",
+    fontSize: 16,
+    fontWeight: "bold",
+    textDecorationLine: "underline",
+    alignSelf: "center"
+  },
+  moreBtn: {
     position: "absolute",
     marginLeft: 150,
     alignSelf: "center",
-    fontSize: 16,
-    fontWeight: 'bold',
-    textDecorationLine: 'underline'
   },
 });
