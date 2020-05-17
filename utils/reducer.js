@@ -76,7 +76,9 @@ export function reducer(state, action) {
           (election.office != "U. S. Senator" &&
             election.district.scope === "statewide") ||
           election.district.scope === "stateUpper" ||
-          election.district.scope === "stateLower"
+          election.district.scope === "stateLower" ||
+          election.district.scope === "judicial"
+
         ) {
           stateContests.push(election);
         }
