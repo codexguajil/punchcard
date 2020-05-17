@@ -62,6 +62,7 @@ export function reducer(state, action) {
           voted: false
         }
       ];
+      const cityRaces = [];
       const countyContests = [];
       const stateContests = [];
       const countryContests = [];
@@ -91,10 +92,14 @@ export function reducer(state, action) {
         ) {
           countryContests.push(election);
         }
+        if (
+          election.district.scope.includes("city")) {
+            cityRaces.push(election)
+          }
       });
       initialState = {
         elections: {
-          citywide: cityContests,
+          citywide: cityRaces.length ? cityRaces : cityContests,
           countywide: countyContests,
           statewide: stateContests,
           nationwide: countryContests,
