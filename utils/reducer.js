@@ -21,18 +21,22 @@ export function reducer(state, action) {
             {
               name: "Betsy Price",
               party: "nonpartisan",
+              id: "0"
             },
             {
               name: "Deborah Peoples",
               party: "nonpartisan",
+              id: "1"
             },
             {
               name: "James McBride",
               party: "nonpartisan",
+              id: "2"
             },
             {
               name: "Mike Haynes",
               party: "nonpartisan (write-in)",
+              id: "3"
             },
           ],
           voted: false
@@ -46,11 +50,13 @@ export function reducer(state, action) {
           candidates: [
             {
               name: "Carlos E. Flores",
-              party: "nonpartisan"
+              party: "nonpartisan",
+              id: "0"
             },
             {
               name: "Jennifer Trevino",
-              party: "nonpartisan"
+              party: "nonpartisan",
+              id: "1"
             }
           ],
           voted: false
@@ -60,7 +66,11 @@ export function reducer(state, action) {
       const stateContests = [];
       const countryContests = [];
 
-      action.data.forEach((election) => {
+      action.data.forEach((election, i) => {
+        election.id = i.toString();
+        election.candidates.forEach((candidate, i) => {
+          candidate.id = i.toString();
+        })
         if (
           (election.office != "U. S. Senator" &&
             election.district.scope === "statewide") ||
