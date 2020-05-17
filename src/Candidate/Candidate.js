@@ -61,6 +61,14 @@ export function Candidate({navigation}) {
           )}
         />
       </View>
+        <View style={styles.container}>
+          <Text style={styles.subheader}>
+              Why you should vote for me
+          </Text>
+          <Text style={styles.paragraph}>
+            In my duties as a community organizer with ten years of experience I prioritized the health and financial well-being of my neighbors. My passion for better representation has motivated me to push for government transparency with Bill 101 and my extensive experience working in ThinkTech International has prepared me to fight for your jobs throughout the next industrial revolution.
+          </Text>
+        </View>
     </ScrollView>
   );
 }
