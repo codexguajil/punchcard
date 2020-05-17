@@ -9,8 +9,10 @@ import {
   View,
   Button,
   TouchableHighlight,
+  TouchableOpacity,
   FlatList
 } from "react-native";
+import { Icon } from "react-native-elements";
 import { Candidate } from '../Candidate/Candidate';
 import { reducer, initialState } from '../../utils/reducer';
 
@@ -36,30 +38,38 @@ function YourRegion({navigation, route}) {
   ]
 
   return (
-    <GestureRecognizer
-      style={{ flex: 1 }}
-      onSwipeRight={() => navigation.dispatch(DrawerActions.openDrawer())}
-    >
-      <View style={{ backgroundColor: "#243447", padding: 20 }}>
-        <Text style={styles.paragraph}>
-          Your city's elections will be held on Monday, April the 15th, 2020.
-          Polls will be open from 8am - 5pm. Don't forget to set a reminder.
-        </Text>
-        <Text style={styles.paragraph}>
-          Your city will require that you bring these forms of id:
-        </Text>
+    <View style={{flex: 1}}>
+      <GestureRecognizer
+        config={{
+          detectSwipeUp: false,
+          detectSwipeDown: false,
+          detectSwipeRight: false,
+        }}
+        onSwipeRight={() => navigation.dispatch(DrawerActions.openDrawer())}
+      >
+        <View style={{ backgroundColor: "#243447", padding: 20 }}>
+          <Text style={styles.paragraph}>
+            Your city's elections will be held on Monday, April the 15th, 2020.
+            Polls will be open from 8am - 5pm. Don't forget to set a reminder.
+          </Text>
+          <Text style={styles.paragraph}>
+            Your city will require that you bring these forms of id:
+          </Text>
+          <FlatList
+            style={styles.paragraph}
+            data={Data}
+            renderItem={({ item }) => (
+              <Text style={styles.paragraph}>{item}</Text>
+            )}
+          />
+        </View>
+        </GestureRecognizer>
         <FlatList
-          style={styles.paragraph}
-          data={Data}
-          renderItem={({item}) => <Text style={styles.paragraph}>{item}</Text>}
+          style={{ paddingTop: 15, flex: 1 }}
+          data={state.elections[route.name]}
+          renderItem={({ item }) => <Item title={item.office} />}
         />
-      </View>
-      <FlatList
-        style={{ paddingTop: 15 }}
-        data={state.elections[route.name]}
-        renderItem={({ item }) => <Item title={item.office} />}
-      />
-    </GestureRecognizer>
+    </View>
   );
 }
 
@@ -69,12 +79,27 @@ export function RegionStack({ navigation: { goBack }, route }) {
       <Stack.Navigator
         screenOptions={{
           headerLeft: () => (
-            <Button title="<" onPress={() => goBack()} />
-          )
+            <TouchableHighlight
+              style={styles.backButton}
+              onPress={() => goBack()}
+            >
+              <Icon name="keyboard-arrow-left" color="white" size={35}>
+                back
+              </Icon>
+            </TouchableHighlight>
+          ),
         }}
       >
-        <Stack.Screen name={route.params.scope} component={YourRegion} initialParams={route.params}/>
-        <Stack.Screen name="Candidate" component={Candidate} options={{headerShown: false, tabBarVisible: false}} />
+        <Stack.Screen
+          name={route.params.scope}
+          component={YourRegion}
+          initialParams={route.params}
+        />
+        <Stack.Screen
+          name="Candidate"
+          component={Candidate}
+          options={{ headerShown: false, tabBarVisible: false }}
+        />
       </Stack.Navigator>
     </View>
   );
