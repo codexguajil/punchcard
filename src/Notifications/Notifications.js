@@ -15,11 +15,11 @@ function Notifications() {
 
   const Data = [{
     id: "0",
-    text: "Your state congress representative is about the vote on Bill 101! See the livestream/ place your vote in the survey/ follow this legislator's voting record."
+    text: "Your state congress representative is about to vote on Bill 101! See the livestream/ place your vote in the survey/ follow this legislator's voting record."
   },
   {
     id: "1",
-    text: "Your senator is scheduled to vote for a bill you bookmarked. Send them an email to make your voice heard!"
+    text: "Your senator is scheduled to vote for a bill you bookmarked. Send them an email to make your voice heard."
   },
   {
     id: "2",
