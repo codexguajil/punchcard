@@ -48,7 +48,13 @@ function Item({ title, id, name, voted, dispatch }) {
 function City() {
   const [state, dispatch] = useReducer(reducer, initialState);
   return (
-    <View style={{ flex: 1 }}>
+    <View 
+      style={{ 
+        flex: 1, 
+        borderTopWidth: StyleSheet.hairlineWidth, 
+        borderTopColor: 'gray' 
+      }}
+    >
       <FlatList
         style={{ flex: 1 }}
         data={state.elections.citywide}
@@ -70,7 +76,13 @@ function City() {
 function State() {
   const [state, dispatch] = useReducer(reducer, initialState);
   return (
-    <View style={{ flex: 1 }}>
+    <View 
+      style={{
+        flex: 1, 
+        borderTopWidth: StyleSheet.hairlineWidth, 
+        borderTopColor: 'gray' 
+      }}
+    >
       <FlatList
         style={{ flex: 1 }}
         data={state.elections.statewide}
@@ -92,7 +104,13 @@ function State() {
 function Country() {
   const [state, dispatch] = useReducer(reducer, initialState);
   return (
-    <View style={{ flex: 1 }}>
+    <View
+      style={{
+        flex: 1,
+        borderTopWidth: StyleSheet.hairlineWidth,
+        borderTopColor: "gray",
+      }}
+    >
       <FlatList
         style={{ flex: 1 }}
         data={state.elections.nationwide}
@@ -116,7 +134,11 @@ function County() {
   return (
     <View style={{ flex: 1 }}>
       <FlatList
-        style={{ flex: 1 }}
+        style={{
+          flex: 1,
+          borderTopWidth: StyleSheet.hairlineWidth,
+          borderTopColor: "gray",
+        }}
         data={state.elections.countywide}
         renderItem={({ item }) => (
           <Item
