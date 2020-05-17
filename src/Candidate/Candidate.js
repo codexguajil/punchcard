@@ -10,6 +10,7 @@ import {
   ScrollView,
   Modal
 } from "react-native";
+import { Icon } from "react-native-elements";
 
 export function Candidate({navigation}) {
   const [modalVisible, setModalVisible] = useState(false);
@@ -41,88 +42,96 @@ export function Candidate({navigation}) {
         style={styles.image}
         source={require("../../assets/profilepic1a.jpg")}
       />
-      <TouchableHighlight
-        style={styles.button}
-        onPress={() => navigation.goBack()}
-      >
-        <Text style={styles.title}>Back</Text>
+      <TouchableHighlight 
+        style={styles.button} 
+        onPress={() => navigation.goBack()}>
+        <Icon name="keyboard-arrow-left" color="white" size={35}>
+          back
+        </Icon>
       </TouchableHighlight>
-      <View style={{paddingBottom: 40}}>
-      <View style={styles.container}>
-        <Text style={styles.subheader}>On The Issues:</Text>
-        <FlatList
-          style={styles.paragraph}
-          data={Data}
-          renderItem={({ item }) => (
-            <Text style={styles.paragraph}>{item}</Text>
-          )}
-        />
-      </View>
-      <View style={styles.container}>
-        <Text style={styles.subheader}>Voting Record</Text>
-        <FlatList
-          style={styles.paragraph}
-          data={Data2}
-          renderItem={({ item }) => (
-            <View style={{ flexDirection: "row" }}>
-              <Text style={styles.item}>{item}</Text>
-              <TouchableOpacity
-                style={styles.moreBtn}
-                onPress={() => {
-                  setModalVisible(true);
-                }}
-              >
-                <View style={{ width: 55, height: 25 }}>
-                  <Text style={styles.appendix}>?</Text>
-                </View>
-              </TouchableOpacity>
-              <Modal
-                animationType="fade"
-                transparent={true}
-                visible={modalVisible}
-              >
-                <TouchableHighlight
-                  style={styles.centeredView}
-                  onPress={() => setModalVisible(!modalVisible)}
+      <View style={{ paddingBottom: 40 }}>
+        <View style={styles.container}>
+          <Text style={styles.subheader}>On The Issues:</Text>
+          <FlatList
+            style={styles.paragraph}
+            data={Data}
+            renderItem={({ item }) => (
+              <Text style={styles.paragraph}>{item}</Text>
+            )}
+          />
+        </View>
+        <View style={styles.container}>
+          <Text style={styles.subheader}>Voting Record</Text>
+          <FlatList
+            style={styles.paragraph}
+            data={Data2}
+            renderItem={({ item }) => (
+              <View style={{ flexDirection: "row" }}>
+                <Text style={styles.item}>{item}</Text>
+                <TouchableOpacity
+                  style={styles.moreBtn}
+                  onPress={() => {
+                    setModalVisible(true);
+                  }}
                 >
-                  <View style={styles.modalView}>
-                    <Text
-                      style={{
-                        fontSize: 16,
-                        fontWeight: "600",
-                        color: "#36454F",
-                        marginBottom: 8
-                      }}
-                    >
-                      Includes:
-                    </Text>
-                    <FlatList
-                      style={{ flexGrow: 0, flex: 0 }}
-                      data={billSummary}
-                      renderItem={({ item }) => (
-                        <Text style={{ color: "#414a4c", fontWeight: "500", flex: 1, paddingBottom: 5 }}>
-                          {item}
-                        </Text>
-                      )}
-                    />
+                  <View style={{ width: 55, height: 25 }}>
+                    <Text style={styles.appendix}>?</Text>
                   </View>
-                </TouchableHighlight>
-              </Modal>
-            </View>
-          )}
-        />
-      </View>
-      <View style={styles.container}>
-        <Text style={styles.subheader}>Why you should vote for me</Text>
-        <Text style={styles.paragraph}>
-          In my duties as a community organizer with ten years of experience I
-          prioritized the health and financial well-being of my neighbors. My
-          passion for better representation has motivated me to push for
-          government transparency with Bill 101 and my extensive experience
-          working in ThinkTech International has prepared me to fight for your
-          jobs throughout the next industrial revolution.
-        </Text>
-      </View>
+                </TouchableOpacity>
+                <Modal
+                  animationType="fade"
+                  transparent={true}
+                  visible={modalVisible}
+                >
+                  <TouchableHighlight
+                    style={styles.centeredView}
+                    onPress={() => setModalVisible(!modalVisible)}
+                  >
+                    <View style={styles.modalView}>
+                      <Text
+                        style={{
+                          fontSize: 16,
+                          fontWeight: "600",
+                          color: "#36454F",
+                          marginBottom: 8,
+                        }}
+                      >
+                        Includes:
+                      </Text>
+                      <FlatList
+                        style={{ flexGrow: 0, flex: 0 }}
+                        data={billSummary}
+                        renderItem={({ item }) => (
+                          <Text
+                            style={{
+                              color: "#414a4c",
+                              fontWeight: "500",
+                              flex: 1,
+                              paddingBottom: 5,
+                            }}
+                          >
+                            {item}
+                          </Text>
+                        )}
+                      />
+                    </View>
+                  </TouchableHighlight>
+                </Modal>
+              </View>
+            )}
+          />
+        </View>
+        <View style={styles.container}>
+          <Text style={styles.subheader}>Why you should vote for me</Text>
+          <Text style={styles.paragraph}>
+            In my duties as a community organizer with ten years of experience I
+            prioritized the health and financial well-being of my neighbors. My
+            passion for better representation has motivated me to push for
+            government transparency with Bill 101 and my extensive experience
+            working in ThinkTech International has prepared me to fight for your
+            jobs throughout the next industrial revolution.
+          </Text>
+        </View>
       </View>
     </ScrollView>
   );
@@ -158,7 +167,7 @@ const styles = StyleSheet.create({
   },
   button: {
     position: "absolute",
-    margin: 20,
+    marginTop: 20,
   },
   subheader: {
     fontSize: 24,
