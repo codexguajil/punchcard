@@ -14,9 +14,12 @@ export const fetchMethod = async () => {
   }
 }
 
-export const addId = (contests) => {
-  contests.forEach((contest, i) => {
-    contest.id = i.toString();
+export const addVoted = (contests) => {
+  contests.forEach(contest => {
+    if(contest.referendumTitle) {
+      contest.office = "Referendum";
+      contest.candidates = [];
+    }
     contest.voted = false;
   })
   return contests;
