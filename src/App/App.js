@@ -2,7 +2,7 @@ import "react-native-gesture-handler";
 import React, { useEffect, useReducer } from 'react';
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { NavigationContainer } from '@react-navigation/native';
-import { fetchMethod, addId } from "../../utils/fetch";
+import { fetchMethod, addVoted } from "../../utils/fetch";
 import { reducer, initialState } from "../../utils/reducer";
 import { HomeScreen } from '../Home/Home';
 import { Icon } from 'react-native-elements';
@@ -28,7 +28,7 @@ export default function App() {
     if (!state.elections.length) {
       const getElections = async () => {
         const data = await fetchMethod();
-        const elections = addId(data.contests);
+        const elections = addVoted(data.contests);
         dispatch({ type: "setElections", data: elections });
       };
       getElections();
