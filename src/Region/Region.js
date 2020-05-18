@@ -25,7 +25,7 @@ function YourRegion({navigation, route}) {
     return (
       <View>
         <TouchableHighlight onPress={() => navigation.navigate("Candidate")}>
-          <Text style={styles.paragraph}>{candidate.name}</Text>
+          <Text style={[styles.cardTitle]}>{candidate.name}</Text>
         </TouchableHighlight>
       </View>
     );
@@ -55,7 +55,7 @@ function YourRegion({navigation, route}) {
           <Text style={styles.title}>{title}</Text>
         </TouchableOpacity>
         <Animated.FlatList
-          style={{ flex: 1, height: heightR, opacity: itemAnim }}
+          style={{ flexDirection: 'column', justifyContent: 'space-evenly', flex: 1, height: heightR, opacity: itemAnim }}
           data={candidates}
           renderItem={({ item }) => (
             <CandidateItem candidate={item} id={item.id} key={item.id} />
@@ -163,6 +163,10 @@ const styles = StyleSheet.create({
   paragraph: {
     fontSize: 13,
     color: "#fff",
+  },
+  cardTitle: {
+    fontSize: 16,
+    color: "#fff"
   },
   title: {
     fontSize: 24,
