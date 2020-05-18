@@ -101,7 +101,7 @@ function YourRegion({navigation, route}) {
         <FlatList
           style={{ paddingTop: 15, flex: 1 }}
           data={state.elections[route.name]}
-          renderItem={({ item }) => <Item title={item.office} />}
+          renderItem={({ item }) => <Item title={item.office} candidates={item.candidates} id={item.id} key={item.id}/>}
         />
     </View>
   );
@@ -118,7 +118,7 @@ export function RegionStack({ navigation: { goBack }, route }) {
               onPress={() => goBack()}
             >
               <Icon name="keyboard-arrow-left" color="white" size={35}>
-                back
+                back  
               </Icon>
             </TouchableHighlight>
           ),
