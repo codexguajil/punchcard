@@ -51,8 +51,14 @@ function YourRegion({navigation, route}) {
 
     return (
       <View style={[styles.item, itemToggle && { backgroundColor: "#213247" }]}>
-        <TouchableOpacity style={{ flex: 0 }} onPress={drawerOpen}>
+        <TouchableOpacity style={{ flex: 0, flexDirection: 'row', justifyContent: 'space-between' }} onPress={drawerOpen}>
           <Text style={styles.title}>{title}</Text>
+          <Icon
+            containerStyle={[{ alignSelf: 'flex-end'}], itemToggle && { transform: [{ rotate: "180deg"}]}}
+            name="keyboard-arrow-down"
+            color="gray"
+            size={35}
+          />
         </TouchableOpacity>
         <Animated.FlatList
           style={{ flexDirection: 'column', justifyContent: 'space-evenly', flex: 1, height: heightR, opacity: itemAnim }}
