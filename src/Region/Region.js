@@ -1,13 +1,13 @@
 import "react-native-gesture-handler";
-import React, { useReducer } from "react";
+import React, { useReducer, useState, useRef } from "react";
 import GestureRecognizer from "react-native-swipe-gestures";
 import { DrawerActions } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import {
+  Animated,
   StyleSheet,
   Text,
   View,
-  Button,
   TouchableHighlight,
   TouchableOpacity,
   FlatList
@@ -148,27 +148,28 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     borderBottomColor: "gray",
-    borderBottomWidth: StyleSheet.hairlineWidth
+    borderBottomWidth: StyleSheet.hairlineWidth,
   },
   containertwo: {
-    flex: 1
+    flex: 1,
   },
   item: {
     backgroundColor: "#243447",
     padding: 20,
-    borderBottomColor: "gray",
-    borderBottomWidth: StyleSheet.hairlineWidth
+    borderRadius: 2,
+    borderBottomColor: "#36454f",
+    borderBottomWidth: StyleSheet.hairlineWidth,
   },
   paragraph: {
     fontSize: 13,
-    color: "#fff"
+    color: "#fff",
   },
   title: {
     fontSize: 24,
-    color: '#fff'
+    color: "#fff",
   },
   button: {
     backgroundColor: "#fff",
-    borderRadius: 3
-  }
+    borderRadius: 3,
+  },
 });
