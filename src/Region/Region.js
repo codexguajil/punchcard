@@ -21,13 +21,47 @@ const Stack = createStackNavigator();
 
 function YourRegion({navigation, route}) {
   const [state, dispatch] = useReducer(reducer, initialState);
-  function Item({ title }) {
+  function CandidateItem ({candidate}) {
     return (
+      <View>
         <TouchableHighlight onPress={() => navigation.navigate("Candidate")}>
-          <View style={styles.item}>
-            <Text style={styles.title}>{title}</Text>
-          </View>
+          <Text style={styles.paragraph}>{candidate.name}</Text>
         </TouchableHighlight>
+      </View>
+    );
+  }
+
+  function Item({ title, candidates }) {
+    const [itemToggle, setItemOpen] = useState(false)
+    const itemAnim = useRef(new Animated.Value(0)).current;
+    const drawerOpen = () => {
+      setItemOpen(!itemToggle);
+        Animated.spring(itemAnim, {
+          toValue: !itemToggle ? 1 : 0,
+          mass: .5,
+          restSpeedThreshold: 90,
+          overshootClamping: true
+        }).start();
+    }
+
+    const heightR = itemAnim.interpolate({
+      inputRange: [0, 1],
+      outputRange: [0, 120]
+    })
+
+    return (
+      <View style={[styles.item, itemToggle && { backgroundColor: "#213247" }]}>
+        <TouchableOpacity style={{ flex: 0 }} onPress={drawerOpen}>
+          <Text style={styles.title}>{title}</Text>
+        </TouchableOpacity>
+        <Animated.FlatList
+          style={{ flex: 1, height: heightR, opacity: itemAnim }}
+          data={candidates}
+          renderItem={({ item }) => (
+            <CandidateItem candidate={item} id={item.id} key={item.id} />
+          )}
+        />
+      </View>
     );
   }
 
