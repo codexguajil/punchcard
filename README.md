@@ -1,7 +1,7 @@
 # punchcard
 
 ### Background
-Introducing Punchcard, an application for digital natives and migrants who want to keep a pulse on their representative government while they're on-the-go. A mobile app, Punchcard was built entirely with React Native--using functional components--and it pulls from Google's Civic Api to provide the user with up-to-date contest data. Using Punchcard, a citizen of a democracy can learn about each candidate in every race they can vote in while keeping track of their voting participation. The goal of Punchcard is to place valuable information about our democracy in the palm of your hands, encouraging the growth of an informed electorate. [See it live](https://exp.host/@codexguajil/punchcard) [See the InVision Prototype](https://projects.invisionapp.com/prototype/punchcard-ck9vsdrd900lml901ld1x33rz/play/e537b54a)
+Introducing Punchcard, an on-the-go application for digital natives and migrants that keeps a pulse on their representative government. A mobile app, Punchcard was built entirely with React Native--using functional components--and it pulls from [Google's Civic Api](https://developers.google.com/civic-information) to provide the user with up-to-date contest data. Using Punchcard, a citizen of a democracy can learn about each candidate in every race they can vote in while keeping track of their voting participation. The goal of Punchcard is to place valuable information about our democracy in the palm of your hands, encouraging the growth of an informed electorate. [See it live](https://exp.host/@codexguajil/punchcard) [See the InVision Prototype](https://projects.invisionapp.com/prototype/punchcard-ck9vsdrd900lml901ld1x33rz/play/e537b54a)
 
 ### Tech
 - React Hooks (useEffect, useReducer, useState, useRef)  
