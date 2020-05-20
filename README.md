@@ -12,6 +12,11 @@ Introducing Punchcard, an application for digital natives and migrants on the go
 - React Native Swipe Gestures  
 - React Native Elements
 
+### Future Iterations
+- Bookmarked Races
+- Representative Voting Updates
+- User Accounts
+
 ### ScreenGrab: 
 | User Interaction |
 |------------|
