@@ -19,12 +19,12 @@ Introducing Punchcard, an on-the-go application for digital natives and migrants
 - Citizen-to-Representative Compatibility + Suggestions
 - Polling Locations and Times (months before election date) 
 - International Localization
-- Live Grading
+- Voter Grading
 
 ### ScreenGrab: 
 | User Interaction |
 |------------|
-| <div align="center"><img src="https://user-images.githubusercontent.com/20582868/82388866-423a0e80-9a00-11ea-8fc8-e280160f6098.gif" /></div> |
+| <div align="center"><img src="https://user-images.githubusercontent.com/20582868/82393673-bbd7f980-9a0c-11ea-94d3-8a27bb4083c2.gif" /></div> |
 
 ### Prototype:
 
