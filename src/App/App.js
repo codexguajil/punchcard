@@ -1,14 +1,13 @@
 import "react-native-gesture-handler";
-import React, { useEffect, useReducer } from 'react';
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import React, { useEffect, useState } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
-import { fetchMethod, addVoted } from "../../utils/fetch";
-import { reducer, initialState } from "../../utils/reducer";
+import { createStackNavigator } from '@react-navigation/stack';
 import { HomeScreen } from '../Home/Home';
-import { Icon } from 'react-native-elements';
-import { NotificationsStack } from '../Notifications/Notifications';
+import { decode, encode } from 'base-64'
+if (!global.btoa) { global.btoa = encode }
+if (!global.atob) { global.atob = decode }
 
-const Tab = createBottomTabNavigator();
+const Stack = createStackNavigator();
 
 const MyTheme = {
   dark: true,
@@ -22,54 +21,28 @@ const MyTheme = {
 };
   
 export default function App() {
-  const [state, dispatch] = useReducer(reducer, initialState);
-
-  useEffect(() => {
-    if (!state.elections.length) {
-      const getElections = async () => {
-        const data = await fetchMethod();
-        const elections = addVoted(data.contests);
-        dispatch({ type: "setElections", data: elections });
-      };
-      getElections();
-    }
-  }, [fetchMethod, reducer]);
+  
 
   return (
     <NavigationContainer theme={MyTheme}>
-      <Tab.Navigator
-        tabBarOptions={{
-          showLabel: false,
-        }}
-        initialRouteName={("Main", { screen: "Home" })}
-      >
-        <Tab.Screen
-          name="Main"
-          component={HomeScreen}
-          options={{
-            tabBarIcon: () => (
-              <Icon
-                name="home"
-                color="white"
-                size={30}
-              />
-            ),
-          }}
-        />
-        <Tab.Screen
-          name="Notifications"
-          component={NotificationsStack}
-          options={{
-            tabBarIcon: () => (
-              <Icon
-                name="notifications"
-                color="white"
-                size={30}
-              />
-            ),
-          }}
-        />
-      </Tab.Navigator>
+      <Stack.Navigator>
+        { user ? (
+          <Stack.Screen name="Main">
+            {props => <MainScreen {...props} extraData={user} />}
+          </Stack.Screen>
+        ) : (
+          <>
+            <Stack.Screen
+              name="Login"
+              component={LoginScreen}
+            />
+            <Stack.Screen
+              name="Registration"
+              component={RegistrationScreen}
+            />
+          </>
+        )}
+      </Stack.Navigator>
     </NavigationContainer>
   );
 }
