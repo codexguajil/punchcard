@@ -12,7 +12,7 @@ import {
 } from "react-native";
 import { Icon } from "react-native-elements";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
-import { reducer, initialState } from '../../../utils/reducer';
+import { reducer, initialState } from '../../utils/reducer';
 
 const Tab = createMaterialTopTabNavigator();
 
@@ -190,14 +190,14 @@ export function YourProfile({ navigation }) {
         <View>
           <Image
             style={styles.bannerimage}
-            source={require("../../assets/boulder.jpeg")}
+            source={require("../../../assets/boulder.jpeg")}
           />
           <TouchableHighlight style={styles.backButton} onPress={() => navigation.goBack()} >
             <Icon name="keyboard-arrow-left" color="white" size={35}>back</Icon>
           </TouchableHighlight>
           <Image
             style={styles.profilepic}
-            source={require("../../assets/profilepic.jpeg")}
+            source={require("../../../assets/profilepic.jpeg")}
           />
           <Text
             style={{

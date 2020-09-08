@@ -12,19 +12,19 @@ export function Feed() {
   const feedData = [
     {
       'user': 'Daniel',
-      'pic': require('../../assets/profilepic2.jpeg'),
+      'pic': require('../../../assets/profilepic2.jpeg'),
       'text': 'Hey! Is anyone interested in getting a group together to go vote on Friday?',
       'id': '0'
     },
     {
       'user': 'Abby',
-      'pic': require('../../assets/profilepic3.jpeg'),
+      'pic': require('../../../assets/profilepic3.jpeg'),
       'text': 'I forgot. When is the last day to send the mail-in ballots?',
       'id': '1'
     },
     {
       'user': 'Yourcity.gov',
-      'pic': require('../../assets/city_hall.jpg'),
+      'pic': require('../../../assets/city_hall.jpg'),
       'text': 'We`ve updated the times and locations for our upcoming election. See below. :)',
       'id': '2'
     }

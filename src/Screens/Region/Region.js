@@ -14,7 +14,7 @@ import {
 } from "react-native";
 import { Icon } from "react-native-elements";
 import { Candidate } from '../Candidate/Candidate';
-import { reducer, initialState } from '../../../utils/reducer';
+import { reducer, initialState } from '../../utils/reducer';
 
 const Stack = createStackNavigator();
 

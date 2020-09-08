@@ -6,7 +6,7 @@ import { fetchMethod, addVoted } from "../../utils/fetch";
 import { reducer, initialState } from "../../utils/reducer";
 import { HomeScreen } from '../Home/Home';
 import { Icon } from 'react-native-elements';
-import { NotificationsStack } from '../Screens/Notifications/Notifications';
+import { NotificationsStack } from '../Notifications/Notifications';
 
 const Tab = createBottomTabNavigator();
 

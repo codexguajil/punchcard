@@ -49,7 +49,7 @@ function HomeStack({navigation}) {
               onPress={() => navigation.dispatch(DrawerActions.openDrawer())}
             >
               <Image
-                source={require("../../assets/profilepic.jpeg")}
+                source={require("../../../assets/profilepic.jpeg")}
                 style={styles.headerIcon}
               />
             </TouchableOpacity>
@@ -68,7 +68,7 @@ function CustomDrawer(props) {
         style={{ paddingBottom: 150 }}
         label={() => (
           <Image
-            source={require("../../assets/profilepic.jpeg")}
+            source={require("../../../assets/profilepic.jpeg")}
             style={styles.drawerIcon}
           />
         )}

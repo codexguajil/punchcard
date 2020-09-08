@@ -40,7 +40,7 @@ export function Candidate({navigation}) {
       <Image
         resizeMode="cover"
         style={styles.image}
-        source={require("../../assets/profilepic1a.jpg")}
+        source={require("../../../assets/profilepic1a.jpg")}
       />
       <TouchableHighlight 
         style={styles.button} 
