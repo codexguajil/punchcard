@@ -7,6 +7,8 @@ import { firebase } from '../../firebase/config';
 export default function RegistrationScreen({ navigation }) {
   const [fullName, setFullName] = useState('')
   const [email, setEmail] = useState('')
+  const [address, setAddress] = useState('')
+  const [zipcode, setZipcode] = useState('')
   const [password, setPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
 
@@ -28,6 +30,8 @@ export default function RegistrationScreen({ navigation }) {
           id: uid,
           email,
           fullName,
+          address,
+          zipcode
         };
         const usersRef = firebase.firestore().collection('users')
         usersRef
@@ -69,6 +73,24 @@ export default function RegistrationScreen({ navigation }) {
           placeholderTextColor="#aaaaaa"
           onChangeText={(text) => setEmail(text)}
           value={email}
+          underlineColorAndroid="transparent"
+          autoCapitalize="none"
+        />
+        <TextInput
+          style={styles.input}
+          placeholder='Address, City, State'
+          placeholderTextColor="#aaaaaa"
+          onChangeText={(text) => setAddress(text)}
+          value={address}
+          underlineColorAndroid="transparent"
+          autoCapitalize="none"
+        />
+        <TextInput
+          style={styles.input}
+          placeholder='Zipcode'
+          placeholderTextColor="#aaaaaa"
+          onChangeText={(text) => setZipcode(text)}
+          value={zipcode}
           underlineColorAndroid="transparent"
           autoCapitalize="none"
         />
