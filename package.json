@@ -13,7 +13,7 @@
     "@react-navigation/bottom-tabs": "^5.2.6",
     "@react-navigation/drawer": "^5.4.1",
     "@react-navigation/material-top-tabs": "^5.1.15",
-    "@react-navigation/native": "^5.2.4",
+    "@react-navigation/native": "^5.7.3",
     "@react-navigation/stack": "^5.2.10",
     "base-64": "^0.1.0",
     "expo": "~37.0.3",
