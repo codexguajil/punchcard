@@ -1,6 +1,6 @@
-import {key, address, electionId} from '../../key';
+import {key, electionId} from '../../key';
 
-export const fetchMethod = async () => {
+export const fetchMethod = async (address) => {
   try {
     const response = await fetch(
       `https://www.googleapis.com/civicinfo/v2/voterinfo?key=${key}&address=${address}&electionId=${electionId}`
