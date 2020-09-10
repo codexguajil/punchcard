@@ -36,7 +36,6 @@ export default function Main() {
   }, [fetchMethod, reducer]);
 
   return (
-    <NavigationContainer theme={MyTheme}>
       <Tab.Navigator
         tabBarOptions={{
           showLabel: false,
@@ -44,7 +43,7 @@ export default function Main() {
         initialRouteName={("Main", { screen: "Home" })}
       >
         <Tab.Screen
-          name="Main"
+          name="Home"
           component={HomeScreen}
           options={{
             tabBarIcon: () => (
@@ -70,6 +69,5 @@ export default function Main() {
           }}
         />
       </Tab.Navigator>
-    </NavigationContainer>
   );
 }
