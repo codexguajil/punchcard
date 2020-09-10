@@ -21,13 +21,13 @@ const MyTheme = {
   },
 };
 
-export default function Main() {
+export default function MainScreen(props) {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   useEffect(() => {
     if (!state.elections.length) {
       const getElections = async () => {
-        const data = await fetchMethod();
+        const data = await fetchMethod(props.extraData.address);
         const elections = addVoted(data.contests);
         dispatch({ type: "setElections", data: elections });
       };
