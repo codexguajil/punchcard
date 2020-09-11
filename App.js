@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { LoginScreen, MainScreen, RegistrationScreen } from './src/Screens';
+import AuthContext from "./AuthContext";
 import { Text, View } from 'react-native';
 import { decode, encode } from 'base-64'
 if (!global.btoa) { global.btoa = encode }
@@ -33,47 +34,53 @@ export default function App() {
   //   )
   // }
 
-  useEffect(() => {
-    const usersRef = firebase.firestore().collection("users");
-    firebase.auth().onAuthStateChanged(user => {
-      if (user) {
-        usersRef
-          .doc(user.uid)
-          .get()
-          .then((document) => {
-            const userData = document.data();
-            setLoading(false);
-            setUser(userData);
-          })
-          .catch((error) => {
-            setLoading(false);
-          });
-      } else {
-        setLoading(false);
-      }
-    });
-  }, []);
+  // useEffect(() => {
+  //   const usersRef = firebase.firestore().collection("users");
+  //   firebase.auth().onAuthStateChanged(user => {
+  //     if (user) {
+  //       usersRef
+  //         .doc(user.uid)
+  //         .get()
+  //         .then((document) => {
+  //           const userData = document.data();
+  //           setLoading(false);
+  //           setUser(userData);
+  //         })
+  //         .catch((error) => {
+  //           setLoading(false);
+  //         });
+  //     } else {
+  //       setLoading(false);
+  //     }
+  //   });
+  // }, []);
 
   return (
     <NavigationContainer theme={MyTheme}>
-      <Stack.Navigator>
-        { user ? (
-          <Stack.Screen name="Main">
-            {props => <MainScreen {...props} extraData={user} />}
-          </Stack.Screen>
-        ) : (
-          <>
-            <Stack.Screen
-              name="Login"
-              component={LoginScreen}
-            />
-            <Stack.Screen
-              name="Registration"
-              component={RegistrationScreen}
-            />
-          </>
-        )}
-      </Stack.Navigator>
+      <AuthContext.Provider value={{user, setUser}}>
+        <Stack.Navigator
+          mode="modal"
+          screenOptions={{
+            headerShown: false,
+          }}>
+          { user ? (
+            <Stack.Screen name="Main">
+              {props => <MainScreen {...props} extraData={user} />}
+            </Stack.Screen>
+          ) : (
+            <>
+              <Stack.Screen
+                name="Login"
+                component={LoginScreen}
+              />
+              <Stack.Screen
+                name="Registration"
+                component={RegistrationScreen}
+              />
+            </>
+          )}
+        </Stack.Navigator>
+      </AuthContext.Provider>
     </NavigationContainer>
   );
 }
