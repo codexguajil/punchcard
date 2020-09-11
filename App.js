@@ -29,32 +29,32 @@ export default function App() {
   const [user, setUser] = useState(null)
 
 
-  // useEffect(() => {
-  //   const usersRef = firebase.firestore().collection("users");
-  //   firebase.auth().onAuthStateChanged(user => {
-  //     if (user) {
-  //       usersRef
-  //         .doc(user.uid)
-  //         .get()
-  //         .then((document) => {
-  //           const userData = document.data();
-  //           setLoading(false);
-  //           setUser(userData);
-  //         })
-  //         .catch((error) => {
-  //           setLoading(false);
-  //         });
-  //     } else {
-  //       setLoading(false);
-  //     }
-  //   });
-  // }, []);
+  useEffect(() => {
+    const usersRef = firebase.firestore().collection("users");
+    firebase.auth().onAuthStateChanged(user => {
+      if (user) {
+        usersRef
+          .doc(user.uid)
+          .get()
+          .then((document) => {
+            const userData = document.data();
+            setLoading(false);
+            setUser(userData);
+          })
+          .catch((error) => {
+            setLoading(false);
+          });
+      } else {
+        setLoading(false);
+      }
+    });
+  }, []);
 
   return (
     <NavigationContainer theme={MyTheme}>
       <AuthContext.Provider value={{user, setUser}}>
         <Stack.Navigator
-          mode="modal"
+          // mode="modal"
           screenOptions={{
             headerShown: false,
           }}>
