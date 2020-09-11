@@ -2,7 +2,7 @@ import "react-native-gesture-handler";
 import React, { useEffect, useState } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import { LoginScreen, MainScreen, RegistrationScreen } from './src/Screens';
+import { LoginScreen, MainScreen, RegistrationScreen, LoadingScreen } from './src/Screens';
 import AuthContext from "./AuthContext";
 import { Text, View } from 'react-native';
 import { decode, encode } from 'base-64'
@@ -28,11 +28,6 @@ export default function App() {
   const [loading, setLoading] = useState(true)
   const [user, setUser] = useState(null)
 
-  // if (loading) {
-  //   return (
-  //   <></>
-  //   )
-  // }
 
   // useEffect(() => {
   //   const usersRef = firebase.firestore().collection("users");
@@ -63,7 +58,12 @@ export default function App() {
           screenOptions={{
             headerShown: false,
           }}>
-          { user ? (
+          { loading ? (
+            <Stack.Screen name="Loading">
+              {() => <LoadingScreen />}
+            </Stack.Screen>
+          ) :
+            user ? (
             <Stack.Screen name="Main">
               {props => <MainScreen {...props} extraData={user} />}
             </Stack.Screen>
