@@ -1,5 +1,5 @@
 import "react-native-gesture-handler";
-import React, { useEffect, useReducer } from 'react';
+import React, { useEffect, useReducer, useContext } from 'react';
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { NavigationContainer } from '@react-navigation/native';
 import { fetchMethod, addVoted } from "../../utils/fetch";
@@ -7,6 +7,7 @@ import { reducer, initialState } from "../../utils/reducer";
 import { HomeScreen } from '../Home/Home';
 import { Icon } from 'react-native-elements';
 import { NotificationsStack } from '../Notifications/Notifications';
+import AuthContext from "../../../AuthContext";
 
 const Tab = createBottomTabNavigator();
 
@@ -21,13 +22,14 @@ const MyTheme = {
   },
 };
 
-export default function MainScreen(props) {
+export default function MainScreen() {
   const [state, dispatch] = useReducer(reducer, initialState);
+  const { user } = useContext(AuthContext);
 
   useEffect(() => {
     if (!state.elections.length) {
       const getElections = async () => {
-        const data = await fetchMethod(props.extraData.address);
+        const data = await fetchMethod(user.address);
         const elections = addVoted(data.contests);
         dispatch({ type: "setElections", data: elections });
       };
@@ -40,7 +42,7 @@ export default function MainScreen(props) {
         tabBarOptions={{
           showLabel: false,
         }}
-        initialRouteName={("Main", { screen: "Home" })}
+        // initialRouteName={("Main", { screen: "Home" })}
       >
         <Tab.Screen
           name="Home"

@@ -65,7 +65,7 @@ export default function App() {
           ) :
             user ? (
             <Stack.Screen name="Main">
-              {props => <MainScreen {...props} extraData={user} />}
+              {() => <MainScreen />}
             </Stack.Screen>
           ) : (
             <>
