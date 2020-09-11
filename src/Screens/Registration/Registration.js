@@ -1,8 +1,9 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import { Image, Text, TextInput, TouchableOpacity, View } from 'react-native'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import styles from './styles';
 import { firebase } from '../../firebase/config';
+import AuthContext from "../../../AuthContext";
 
 export default function RegistrationScreen({ navigation }) {
   const [fullName, setFullName] = useState('')
@@ -11,6 +12,7 @@ export default function RegistrationScreen({ navigation }) {
   const [zipcode, setZipcode] = useState('')
   const [password, setPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
+  const { setUser } = useContext(AuthContext);
 
   const onFooterLinkPress = () => {
     navigation.navigate('Login')
@@ -38,7 +40,10 @@ export default function RegistrationScreen({ navigation }) {
           .doc(uid)
           .set(data)
           .then(() => {
-            navigation.navigate('Home', {user: data})
+            setUser({user: data})
+            navigation.navigate("Main", {
+              screen: "Home"
+            });
           })
           .catch((error) => {
             alert(error)
