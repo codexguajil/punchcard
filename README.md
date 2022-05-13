@@ -7,6 +7,7 @@ Introducing Punchcard, an on-the-go application for digital natives and migrants
 - React Hooks (useEffect, useReducer, useState, useRef)  
 - React Navigation (Tab, Stack, Drawer)/Nested Navigation  
 - React Native Animated Components/Interpolation  
+- Firebase Authentication
 - Async/Await  
 - Conditional Stylings  
 - React Native Swipe Gestures  
