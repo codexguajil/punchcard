@@ -9,7 +9,7 @@ To run on your machine:
   - run command 'expo start'
   - open in xcode
   - register and then login
-  - If using expo, must use version 37 and below
+  - must use expo version 37
 
 ### Tech
 - React Hooks (useEffect, useReducer, useState, useRef)  
